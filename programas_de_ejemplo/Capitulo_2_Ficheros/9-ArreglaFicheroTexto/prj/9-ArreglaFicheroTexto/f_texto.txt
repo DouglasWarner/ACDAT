@@ -1,3 +1,9 @@
+<<<<<<< HEAD
   Este   es un fichero de texto. 
  quizá no está   del todo bien.
  Pero     se puede arreglar.
+=======
+  Este   es un fichero de texto. 
+ quizá no está   del todo bien.
+ Pero     se puede arreglar.
+>>>>>>> origin/master
