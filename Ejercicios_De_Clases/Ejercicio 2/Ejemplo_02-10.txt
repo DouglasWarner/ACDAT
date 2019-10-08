@@ -1,0 +1,7 @@
+1. Porque no esta declarada la excepcion. Y hace falta declararla con throws en el método creaFicheroTempConCar.
+
+2. En el método main, al final del try tenemos que poner ft.delete() sino lo ponemos no borraria el fichero.
+
+3. Tenemos que declarar la variable File y FileWriter fuera en la clase para que sea visible en toda la clase. Y asi podemos cerranlo
+en la llave finally.
+

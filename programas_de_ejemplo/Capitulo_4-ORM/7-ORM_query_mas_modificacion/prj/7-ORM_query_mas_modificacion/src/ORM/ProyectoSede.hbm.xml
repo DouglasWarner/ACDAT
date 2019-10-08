@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-ago-2018 18:44:58 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.ProyectoSede" table="proyecto_sede" catalog="proyecto_orm" optimistic-lock="version">
+        <composite-id name="id" class="ORM.ProyectoSedeId">
+            <key-property name="idProy" type="int">
+                <column name="id_proy" />
+            </key-property>
+            <key-property name="idSede" type="int">
+                <column name="id_sede" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="proyecto" class="ORM.Proyecto" update="false" insert="false" fetch="select">
+            <column name="id_proy" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sede" class="ORM.Sede" update="false" insert="false" fetch="select">
+            <column name="id_sede" not-null="true" />
+        </many-to-one>
+        <property name="FInicio" type="date">
+            <column name="f_inicio" length="10" not-null="true" />
+        </property>
+        <property name="FFin" type="date">
+            <column name="f_fin" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

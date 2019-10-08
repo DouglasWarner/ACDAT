@@ -1,0 +1,43 @@
+
+module gest_proyectos {
+
+  interface Proyecto: persistent
+  {
+    attribute String<32> nom_proy;
+    attribute Date f_inicio;
+    attribute Date Nullable f_fin;
+    relationship set<Empleado> tiene_asignado[0,-1]
+      inverse Empleado::asignado_a;
+    relationship EmpleadoPlantilla jefe_proyecto
+      inverse  EmpleadoPlantilla::gestiona;
+  };
+
+  interface Empleado: persistent {
+    attribute String<9> dni;
+    attribute String<60> nom_emp;
+    relationship set<Proyecto> asignado_a[0,-1]
+      inverse Proyecto::tiene_asignado;
+    relationship DatosProfesionales tiene_datos_prof[0,1]
+      inverse DatosProfesionales::datos_prof_de;
+    mt_index Empleado_pk unique_key TRUE criteria { dni MT_ASCEND };
+    mt_index Empleado_i_nom_emp criteria { nom_emp MT_ASCEND };
+  };
+
+  interface DatosProfesionales: persistent {
+    attribute String<9> dni;
+    attribute String<2> categoria;
+    attribute Float sueldo_bruto_anual;
+    relationship Empleado datos_prof_de
+      inverse Empleado::tiene_datos_prof;
+    mt_index Empleado_DatosProf_pk unique_key TRUE criteria { dni MT_ASCEND };
+  };
+
+  interface EmpleadoPlantilla: Empleado: persistent {
+    attribute String<12> num_emp;
+    relationship set<Proyecto> gestiona
+      inverse Proyecto::jefe_proyecto;
+    mt_index EmpleadoPlantilla_i_dni unique_key TRUE criteria { dni MT_ASCEND };
+    mt_index EmpleadoPlantilla_i_nom_emp criteria { Empleado::nom_emp MT_ASCEND };
+  };
+
+};

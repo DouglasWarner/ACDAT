@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/clientes.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE clientes SYSTEM "clientes.dtd">
+
+    <clientes>
+    ...
+    </clientes>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT clientes (cliente)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT cliente (apellidos|CP|validez)*>
+<!ATTLIST cliente
+    DNI CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT apellidos (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT CP (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT validez EMPTY>
+<!ATTLIST validez
+    estado CDATA #IMPLIED
+    timestamp CDATA #IMPLIED
+  >

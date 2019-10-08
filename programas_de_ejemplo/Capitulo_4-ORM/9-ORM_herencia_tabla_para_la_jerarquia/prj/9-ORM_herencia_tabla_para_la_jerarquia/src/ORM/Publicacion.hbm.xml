@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="ORM.Publicacion" table="publicacion" catalog="proyecto_orm" discriminator-value="pub">
+    <id name="idPub" type="java.lang.Integer">
+      <column name="id_pub"/>
+      <generator class="identity"/>
+    </id>
+    <discriminator column="tipo" type="string"/>
+    <property name="nomPub" type="string">
+      <column name="nom_pub" length="50"/>
+    </property>
+    <subclass name="ORM.Libro" discriminator-value="lib">
+      <property name="isbn" type="string">
+        <column name="isbn" length="13"/>
+      </property>
+      <property name="autor" type="string">
+        <column name="autor" length="40"/>
+      </property>
+    </subclass> 
+    <subclass name="ORM.Revista" discriminator-value="rev">  
+      <property name="issn" type="string">
+        <column name="issn" length="10"/>
+      </property>
+    </subclass>
+  </class>
+</hibernate-mapping>
