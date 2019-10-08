@@ -1,0 +1,7 @@
+Antes de ejecutar este programa de muestra, hay que seguir los pasos indicados en el libro para:
+
+- Crear la base de datos AcDat_BDO.
+- Importar en ella el esquema de objetos definido en el fichero odl mostrado en el libro, que se incluye aquí en un directorio llamado odl.
+
+Las stub classes se pueden generar como se explica en el libro. Pero no es necesario para ejecutar este ejemplo. Ya se han generado e incluido en el paquete gest_proyectos.
+

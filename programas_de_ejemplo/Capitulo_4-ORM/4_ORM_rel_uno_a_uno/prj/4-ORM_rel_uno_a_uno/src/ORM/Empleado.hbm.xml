@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-ago-2018 18:44:58 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.Empleado" table="empleado" catalog="proyecto_orm" optimistic-lock="version">
+        <id name="dni" type="string">
+            <column name="dni" length="9" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="departamento" class="ORM.Departamento" fetch="select">
+            <column name="id_depto" not-null="true" />
+        </many-to-one>
+        <property name="nomEmp" type="string">
+            <column name="nom_emp" length="40" not-null="true" />
+        </property>
+        <one-to-one name="empleadoDatosProf" class="ORM.EmpleadoDatosProf"></one-to-one>
+    </class>
+</hibernate-mapping>

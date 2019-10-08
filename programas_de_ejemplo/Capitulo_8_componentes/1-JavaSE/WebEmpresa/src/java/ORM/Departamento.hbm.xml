@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-sep-2018 20:58:29 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.Departamento" table="departamento" catalog="proyecto_orm" optimistic-lock="version">
+        <id name="idDepto" type="java.lang.Integer">
+            <column name="id_depto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="sede" class="ORM.Sede" fetch="select">
+            <column name="id_sede" not-null="true" />
+        </many-to-one>
+        <property name="nomDepto" type="string">
+            <column name="nom_depto" length="32" not-null="true" />
+        </property>
+        <set name="empleados" table="empleado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_depto" not-null="true" />
+            </key>
+            <one-to-many class="ORM.Empleado" />
+        </set>
+    </class>
+</hibernate-mapping>

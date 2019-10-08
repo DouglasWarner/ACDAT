@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+   
+    <xs:element name="clientes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="cliente" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>                      
+    </xs:element>
+    
+    <xs:element name="cliente">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="apellidos" type="xs:string"/>
+                <xs:element name="CP" minOccurs="0" type="tipo_CP"/>
+                <xs:element ref="validez" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="DNI" use="required" type="tipo_DNI"/>
+        </xs:complexType>                      
+    </xs:element>
+    
+    <xs:element name="validez">
+        <xs:complexType>
+            <xs:attribute name="estado" use="required" type="tipo_estado"/>
+            <xs:attribute name="timestamp" use="optional" type="tipo_timestamp"/>
+        </xs:complexType>
+    </xs:element>
+            
+    <xs:simpleType name="tipo_CP">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="tipo_timestamp">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="tipo_DNI">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9XYZ]\d{7}[\dA-Z]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="tipo_estado">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="borrado"/>
+            <xs:enumeration value="vigente"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+</xs:schema>
