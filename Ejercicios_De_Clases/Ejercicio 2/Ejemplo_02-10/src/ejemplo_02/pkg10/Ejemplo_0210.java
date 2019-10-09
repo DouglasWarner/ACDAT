@@ -32,7 +32,7 @@ public class Ejemplo_0210 {
     public static void main(String[] args) {
         try
         {
-            File ft = ej1.creaFicheroTempConCar("AAAA_", 'A', 20);
+            File ft = new Ejemplo_0210().creaFicheroTempConCar("AAAA_", 'A', 20);
             System.out.println("Creando fichero: " + ft.getAbsolutePath());
             ft.delete();
         } 
