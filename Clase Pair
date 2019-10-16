@@ -1,0 +1,83 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+// Pair class
+class Pair<U, V>
+{
+	public final U key;	// first field of a Pair
+	public final V value; 	// second field of a Pair
+
+	// Constructs a new Pair with specified values
+	public Pair(U key, V value)
+	{
+		this.key = key;
+		this.value = value;
+	}
+
+	@Override
+	// Checks specified object is "equal to" current object or not
+	public boolean equals(Object o)
+	{
+		if (this == o)
+			return true;
+
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Pair<?, ?> pair = (Pair<?, ?>) o;
+
+		// call equals() method of the underlying objects
+		if (!key.equals(pair.key))
+			return false;
+		return value.equals(pair.value);
+	}
+
+	@Override
+	// Computes hash code for an object to support hash tables
+	public int hashCode()
+	{
+		// use hash codes of the underlying objects
+		return 31 * key.hashCode() + value.hashCode();
+	}
+
+	@Override
+	public String toString()
+	{
+		return "(" + key + ", " + value + ")";
+	}
+        
+        // Devuelve la clave
+	public U getKey()
+        {
+            return this.key;
+        }
+        
+        // Devuelve el valor
+        public V getValue()
+        {
+            return this.value;
+        }
+}
+
+// Program to implement Pair Class in Java
+class Main
+{
+	public static void main(String[] args)
+	{
+		Pair<String, Integer> p1 = new Pair("John", 26);
+		Pair<String, Integer> p2 = new Pair("Tom", 30);
+		Pair<String, Integer> p3 = new Pair("John", 26);
+
+		List<Pair<String, Integer>> pairs = new ArrayList<>();
+		pairs.add(p1);
+		pairs.add(p2);
+		pairs.add(p3);
+		
+		System.out.println(pairs);
+
+		Set<Pair<String, Integer>> distinctPairs = new HashSet<>(pairs);
+		System.out.println(distinctPairs);
+	}
+}

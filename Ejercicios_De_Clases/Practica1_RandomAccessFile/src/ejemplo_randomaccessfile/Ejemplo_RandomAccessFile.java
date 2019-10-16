@@ -21,6 +21,7 @@ public class Ejemplo_RandomAccessFile {
      * @param args the command line arguments
      */    
     static long offset = 0;
+    static final int LONG_REG = 16;
     
     public static void main(String[] args) {
         String[] nombres = {"Juan", "Pepito", "Don José", "Popeye", "Paco"};
@@ -33,10 +34,14 @@ public class Ejemplo_RandomAccessFile {
             
             for(String nombre : nombres)
             {
+                for(int i=nombre.length()+1; i<=LONG_REG; i++)
+                    nombre += " ";
+                    
                 raf.seek(offset);
                 raf.write(nombre.getBytes("UTF-8"));
                 offset += 16;
             }
+            
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
