@@ -5,8 +5,6 @@
  */
 package insertarlineaenfichero;
 
-import com.sun.source.tree.Tree;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,21 +41,21 @@ public class InsertarLineaEnFichero {
         
         try(BufferedReader bfr = new BufferedReader(new FileReader(fichOriginal)))
         {
-            File fichTemp = File.createTempFile(nomFichero, "");
-            BufferedWriter bfw = new BufferedWriter(new FileWriter(fichTemp));
-            
-            String linea = bfr.readLine();
-            while(linea != null)
-            {
-                bfw.write(linea);
-                bfw.newLine();
-                bfw.write("----");
-                bfw.newLine();
-                linea = bfr.readLine();
+            String nombFicheroTemp = nomFichero + new SimpleDateFormat("yyyyMMdd").format(new Date()) + ".bak";
+            File fichTemp = new File(nombFicheroTemp);
+            try (BufferedWriter bfw = new BufferedWriter(new FileWriter(fichTemp))) {
+                String linea = bfr.readLine();
+                while(linea != null)
+                {
+                    bfw.write(linea);
+                    bfw.newLine();
+                    bfw.write("----");
+                    bfw.newLine();
+                    linea = bfr.readLine();
+                }
             }
-            bfw.close();
             
-            String nombFicheroTemp = nomFichero + "." + new SimpleDateFormat("yyyyMMdd").format(new Date()) + ".bak";
+            
             
             if(fichOriginal.renameTo(new File(nombFicheroTemp)))
             {

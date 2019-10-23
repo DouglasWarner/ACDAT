@@ -6,7 +6,6 @@
 package generarficherobinario;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,30 +20,45 @@ public class GenerarFicheroBinario {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        String fich = "/home/douglas/Escritorio/Fichero.txt";
+        String fich = "C:\\basura\\Fichero.txt";
+        File fichero = new File(fich);
         
-        leerFichero(fich);
+        if(fichero.exists() && fichero.isFile())
+            leerFichero(fichero);
+        else
+            System.out.println("El fichero no existe");
         
     }
     
-    static void leerFichero(String fichero) throws FileNotFoundException, IOException
+    static void leerFichero(File fichero) throws FileNotFoundException, IOException
     {
-        String caracter;
+        //String caracter;
+        int caracter = 0;
+        String hex = "";
         
         try(BufferedReader entrada = new BufferedReader(new FileReader(fichero));
-            FileOutputStream salida = new FileOutputStream(new File(fichero+"binario.txt"))){
+            FileOutputStream salida = new FileOutputStream(new File(fichero.getName()+"binario.txt"))){
 
-            while ((caracter = entrada.readLine()) != null)
+            while ((caracter = entrada.read()) != -1)
             {
-                String hex = String.format("%X", Integer.parseInt(caracter));
+                if(caracter != (int)' ')
+                    hex += (char)caracter;
                 
-                salida.write(Integer.parseInt(hex));                
+            }
+            System.out.println(hex);
+            for (int i = 0; i < hex.length(); i++) {
+                if(hex.charAt(i) != ',')
+                    System.out.println(hex.charAt(i));
             }
             
+            /*while ((caracter = entrada.readLine()) != null)
+            {                
+                //salida.write(Integer.parseInt(caracter));
+            }*/
         }
     }
-    
 }
