@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package consultainversa;
+package averiguarfilas;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
 
 /**
  *
  * @author douglas
  */
-public class ConsultaInversa {
-    
+public class AveriguarFilas {
+
     public static void muestraErrorSQL(SQLException e)
     {
         System.err.println("SQL ERROR mensaje: " + e.getMessage());
@@ -37,34 +37,23 @@ public class ConsultaInversa {
         try (Connection c = DriverManager.getConnection(urlConnection, user, pwd))
         {
             System.out.println("Conexión realizada.");
-            SelectInverso(c);
+            NFilas(c);
         } catch (SQLException ex) {
             muestraErrorSQL(ex);
         }
     }
     
-    public static void SelectInverso(Connection c)
+    public static void NFilas(Connection c)
     {
         try (Statement s = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); 
                 ResultSet rs = s.executeQuery("select * from CLIENTES"))
         {
-            int fila;
-            int numCP;
-            rs.last();
-            fila = rs.getRow();
-            do {
-                
-                rs.absolute(fila);
-                System.out.println("[" + fila-- +"]");
-                System.out.println("DNI: " + rs.getString("DNI"));
-                System.out.println("APELLIDOS: " + rs.getString("APELLIDOS"));
-                numCP = rs.getInt("CP");
-                System.out.println("CP: " + (rs.wasNull() ? "null" : numCP));                
-                
-            } while(!rs.isFirst());
+            int count = 0;
+            if(rs.last())
+                count = rs.getRow();
+            System.out.println("Número de filas: " + count);
         } catch (SQLException e){
             muestraErrorSQL(e);
         }
     }
-    
 }
