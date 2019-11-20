@@ -1,9 +1,10 @@
+drop database facturacion;
 create database facturacion;
 use facturacion;
 
 create table cliente(
  id_cliente integer not null auto_increment,
- dni char(8) not null,
+ dni char(9) not null,
  nom_cliente varchar(50) not null,
 
  primary key(id_cliente)
