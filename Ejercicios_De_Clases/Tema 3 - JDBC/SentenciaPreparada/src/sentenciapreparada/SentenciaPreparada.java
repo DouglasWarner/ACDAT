@@ -38,8 +38,8 @@ public class SentenciaPreparada {
         try (Connection c = DriverManager.getConnection(urlConnection, user, pwd))
         {
             System.out.println("Conexión realizada.");
-            // CreateTableClientes1(c);
-            // Insert(c);
+            //CreateTableClientes1(c);
+            //Insert(c);
             
             ConsultaPreparada(c);
             

@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+78901234X|NADALES             |44126
+56789012B|SAMPER              |29730
+=======
+78901234X|NADALES             |44126
+56789012B|SAMPER              |29730
+>>>>>>> origin/master

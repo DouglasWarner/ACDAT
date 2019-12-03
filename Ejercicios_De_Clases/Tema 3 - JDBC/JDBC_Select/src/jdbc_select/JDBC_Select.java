@@ -57,8 +57,7 @@ public class JDBC_Select {
               System.out.println("["+ iFila++ + "]");
               System.out.println("DNI: " + rs.getString("DNI"));
               System.out.println("APELLIDOS: " + rs.getString("APELLIDOS"));
-              int numCP = rs.getInt("CP");
-              System.out.println("CP: " + (rs.wasNull() ? "null" : numCP));
+              System.out.println("CP: " + (rs.wasNull() ? "null" : rs.getInt("CP")));
                 // Haciendo un getInt() y al ser null te devuelve un 0.
                 // Al utilizar getString() te devolveria la cadena null.
                 // Lo correcto para más utilizadad, sería utilizar el método wasNull(). Y comprobarlo con una condición ternaria.

@@ -28,9 +28,9 @@ public class JDBC_Connection {
     try (Connection c = DriverManager.getConnection(urlConnection, user, pwd)) {
       System.out.println("Conexión realizada.");
       
-        // CreateTableClientes(c);      CREA LA TABLA CLIENTES
-        // InsertTableClientes(c);      INSERTA EN LA TABLA CLIENTES
-        // ModificarTableClientes(c);   MODIFICA (ELIMINA Y ACTUALIZA) EN LA TABLA CLIENTES
+        //CreateTableClientes(c);     //  CREA LA TABLA CLIENTES
+        //InsertTableClientes(c);     //  INSERTA EN LA TABLA CLIENTES
+        //ModificarTableClientes(c); //  MODIFICA (ELIMINA Y ACTUALIZA) EN LA TABLA CLIENTES
         
     } catch (SQLException e) {
       System.out.println("SQL mensaje: " + e.getMessage());
