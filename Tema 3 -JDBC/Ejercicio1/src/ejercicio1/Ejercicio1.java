@@ -39,9 +39,9 @@ public class Ejercicio1 {
         String pwd = "123";
         
         int nFilas = 0;
-        int indice = 0;
+        int primero = 0;
         boolean tabla = true;
-        String comando = null;
+        String comando;
         
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) 
         {
@@ -62,7 +62,7 @@ public class Ejercicio1 {
                 rs.last();
                 nFilas = rs.getRow();
                 rs.first();
-                indice = rs.getRow();
+                primero = rs.getRow();
                 
                 System.out.println("La tabla tiene " + nFilas + " filas.");
 
@@ -75,21 +75,30 @@ public class Ejercicio1 {
                         case ".":
                             return;
                         case "k":
-                            if(indice > nFilas-1)
-                                System.out.println("No hay mas datos a listar");
+                            if(!rs.isLast())
+                            {
+                                rs.next();
+                                MostrarResult(rs);
+                            }
                             else
-                                System.out.println("Contenido " + ++indice);
+                                System.out.println("No hay mas datos a listar");
                             break;
                         case "d":
-                            if(indice < 1)
-                                System.out.println("Este es el primer dato a listar");
+                            if(!rs.isFirst())
+                            {
+                                rs.previous();
+                                MostrarResult(rs);
+                            }                            
                             else
-                                System.out.println("Contenido " + --indice);
+                                System.out.println("Este es el primer dato a listar");
                             break;
                         default:
                             if(comando.matches("^[0-9]+$"))
-                                if(Integer.parseInt(comando) < nFilas && Integer.parseInt(comando) > 0)
-                                    System.out.println("Contenido " + comando);
+                                if(Integer.parseInt(comando) <= nFilas && Integer.parseInt(comando) >= primero)
+                                 {
+                                     rs.absolute(Integer.parseInt(comando));
+                                     MostrarResult(rs);
+                                 }                                    
                             break;
                     }
                 }
@@ -111,15 +120,20 @@ public class Ejercicio1 {
     
     static void MostrarResult(ResultSet rs) throws SQLException
         {
+            String nombreCol;
+            Object columnaResultado;
+            String CampoValor;
+            int nColumna;
             ResultSetMetaData rsmd = rs.getMetaData();
-            System.out.println("[" + rs.getRow() + "]");  // // Obtiene posición del cursor dentro del ResultSet
-            int numCol = rsmd.getColumnCount();
-            for (int i = 1; i <= numCol; i++) 
+            
+            System.out.println("[" + rs.getRow() + "]");
+            nColumna = rsmd.getColumnCount();
+            for (int i = 1; i <= nColumna; i++) 
             {
-              String nomCol = rsmd.getColumnName(i);
-              Object colVal = rs.getObject(i);
-              String displVal = (colVal == null) ? "NULL" : colVal.toString();
-              System.out.println(nomCol + ": " + displVal);
+              nombreCol = rsmd.getColumnName(i);
+              columnaResultado = rs.getObject(i);
+              CampoValor = (columnaResultado == null) ? "NULL" : columnaResultado.toString();
+              System.out.println(nombreCol + ": " + CampoValor);
             }
         }
 }
