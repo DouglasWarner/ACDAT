@@ -1,8 +1,3 @@
-﻿/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ejemplo.dao;
 
 import java.sql.Connection;
@@ -57,7 +52,7 @@ public class EjemploDAO {
             p2.Save(c);
             
             Factura fTmp = Factura.getFactura(1, c);
-            Producto pTmp = Producto.getProducto(1, c);            
+            Producto pTmp = Producto.getProducto(2, c);            
             
             fTmp.addLineaFactura(pTmp, 10, c);
             
