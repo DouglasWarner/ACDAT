@@ -10,6 +10,7 @@ import ORM.Empleado;
 import ORM.Sede;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 /**
  *
  * @author metho
