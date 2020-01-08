@@ -8,7 +8,6 @@ package ejemplo_proyectoorm;
 import ORM.Departamento;
 import ORM.Empleado;
 import ORM.Sede;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 /**
@@ -34,7 +33,7 @@ public class Ejemplo_ProyectoORM {
             s.save(depart1);
             
             ORM.Departamento depart2 = new Departamento();
-            depart2.setNomDepto("Desarrollo");
+            depart2.setNomDepto("Recursos Humanos");
             depart2.setSede(sede);
             
             s.save(depart2);
@@ -67,6 +66,8 @@ public class Ejemplo_ProyectoORM {
         }
         catch (Exception e)
         {
+            //e.getCause();
+            //ConstraintViolationException ex;
             e.printStackTrace(System.err);
             if(t != null)
                 t.rollback();
