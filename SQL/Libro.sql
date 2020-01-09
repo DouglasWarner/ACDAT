@@ -50,7 +50,11 @@ create table proyecto_sede (
   foreign key fk_proysede_sede (id_sede) references sede(id_sede)
 );
 
+<<<<<<< HEAD
 CREATE USER 'libro_ad'@'localhost' IDENTIFIED BY 'libro_ad';
+=======
+#CREATE USER 'libro_ad'@'localhost' IDENTIFIED BY '123';
+>>>>>>> origin/master
 
 GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,EXECUTE
 ON proyecto_orm.* TO 'libro_ad'@'localhost';

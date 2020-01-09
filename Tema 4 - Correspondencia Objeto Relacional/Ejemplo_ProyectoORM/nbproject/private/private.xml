@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/douglas/Escritorio/ACDAT/Tema%204%20-%20Correspondencia%20Objeto%20Relacional/Ejemplo_ProyectoORM/src/ORM/EmpleadoDatosProf.hbm.xml</file>
             <file>file:/home/douglas/Escritorio/ACDAT/Tema%204%20-%20Correspondencia%20Objeto%20Relacional/Ejemplo_ProyectoORM/src/ORM/Departamento.hbm.xml</file>
             <file>file:/home/douglas/Escritorio/ACDAT/Tema%204%20-%20Correspondencia%20Objeto%20Relacional/Ejemplo_ProyectoORM/src/ejemplo_proyectoorm/Ejemplo_ProyectoORM.java</file>
+=======
+            <file>file:/E:/Curso%20DAM/ACDAT/Tema%204%20-%20Correspondencia%20Objeto%20Relacional/Ejemplo_ProyectoORM/src/ejemplo_proyectoorm/Ejemplo_ProyectoORM.java</file>
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>

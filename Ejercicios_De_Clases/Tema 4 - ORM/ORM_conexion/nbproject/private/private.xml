@@ -2,15 +2,8 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-            <file>file:/home/douglas/NetBeansProjects/ORM_conexion/src/orm_conexion/ORM_conexion.java</file>
-            <file>file:/home/douglas/NetBeansProjects/ORM_conexion/src/hibernate.reveng.xml</file>
-            <file>file:/home/douglas/NetBeansProjects/ORM_conexion/src/hibernate.cfg.xml</file>
-            <file>file:/home/douglas/NetBeansProjects/ORM_conexion/src/orm_conexion/HibernateUtil.java</file>
+            <file>file:/E:/Curso%20DAM/ACDAT/Ejercicios_De_Clases/Tema%204%20-%20ORM/ORM_conexion/src/ORM/Departamento.java</file>
         </group>
->>>>>>> origin/master
     </open-files>
 </project-private>

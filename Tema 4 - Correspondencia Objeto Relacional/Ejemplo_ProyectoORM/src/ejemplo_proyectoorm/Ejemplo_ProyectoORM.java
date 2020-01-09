@@ -8,7 +8,6 @@ package ejemplo_proyectoorm;
 import ORM.Departamento;
 import ORM.Empleado;
 import ORM.Sede;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
