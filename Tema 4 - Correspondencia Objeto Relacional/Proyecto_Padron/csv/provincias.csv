@@ -1,49 +1,49 @@
-1;Alava;1
-2;Albacete;1
-3;Alicante;1
-4;Almería;1
-5;Ávila;1
-6;Badajoz;1
-7;Baleares;1
-8;Barcelona;1
-9;Burgos;2
-10;Cáceres;2
-11;Cádiz;2
+01;Alava;1
+02;Albacete;8
+03;Alicante;1
+04;Almería;1
+05;Ávila;5
+06;Badajoz;11
+07;Baleares;7
+08;Barcelona;9
+09;Burgos;2
+10;Cáceres;11
+11;Cádiz;1
 12;Castellón;3
-13;Ciudad Real;4
-14;Córdoba;5
-15;A Coruña;5
-16;Cuenca;6
-17;Girona;7
-18;Granada;7
+13;Ciudad Real;8
+14;Córdoba;1
+15;A Coruña;12
+16;Cuenca;8
+17;Girona;9
+18;Granada;1
 19;Guadalajara;7
 20;Guipúzcoa;7
-21;Huelva;7
+21;Huelva;1
 22;Huesca;7
-23;Jaén;7
-24;León;7
-25;Lleida;7
-26;La Rioja;8
+23;Jaén;1
+24;León;8
+25;Lleida;9
+26;La Rioja;17
 27;Lugo;8
-28;Madrid;8
-29;Málaga;8
-30;Murcia;8
-31;Navarra;9
-32;Ourense;9
+28;Madrid;13
+29;Málaga;1
+30;Murcia;14
+31;Navarra;15
+32;Ourense;12
 33;Asturias;9
 34;Palencia;9
-35;Las Palmas;10
+35;Las Palmas;5
 36;Pontevedra;10
 37;Salamanca;10
-38;Santa Cruz de Tenerife;11
-39;Cantabria (Santander);11
+38;Santa Cruz de Tenerife;5
+39;Cantabria (Santander);6
 40;Segovia;12
-41;Sevilla;12
+41;Sevilla;1
 42;Soria;12
 43;Tarragona;12
 44;Teruel;13
 45;Toledo;14
-46;Valencia;15
+46;Valencia;10
 47;Valladolid;16
 48;Vizcaya;16
 49;Zamora;16

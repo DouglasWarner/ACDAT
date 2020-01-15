@@ -9,6 +9,7 @@ import ORM_Padron.Comunidad;
 import ORM_Padron.Localidad;
 import ORM_Padron.Provincia;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,8 +29,8 @@ public class Padron {
      */
     public static void main(String[] args) {
         
-        String ficheroComunidad = "/home/douglas/Escritorio/Proyecto_Padron/csv/comunidades.csv";
-        String ficheroProvincia = "/home/douglas/Escritorio/Proyecto_Padron/csv/provincias.csv";
+        String ficheroComunidad = "./../csv/comunidades.csv";
+        String ficheroProvincia = "./../csv/provincias.csv";
         String[] localidades = {"Torremolinos","Benalmadena","Fuengirola","Marbella"};
         
         Transaction t = null;
@@ -39,8 +40,11 @@ public class Padron {
             t = s.beginTransaction();
             
             LeerCamposComunidad(ficheroComunidad, s);
-            //LeerCamposProvincia(ficheroProvincia, s);
-            //InsertarLocalidades(localidades, s);
+            t.commit();
+            
+            t = s.beginTransaction();
+            LeerCamposProvincia(ficheroProvincia, s);
+            InsertarLocalidades(localidades, s);
             
             t.commit();            
         }
@@ -55,7 +59,7 @@ public class Padron {
     public static void LeerCamposComunidad(String ficheroComunidad, Session s) 
     {
         String linea;
-        try(BufferedReader bf = new BufferedReader(new FileReader(ficheroComunidad)))
+        try(BufferedReader bf = new BufferedReader(new FileReader(new File(ficheroComunidad))))
         {
             while((linea = bf.readLine()) != null)
             {
@@ -65,9 +69,9 @@ public class Padron {
             }
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Padron.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(Padron.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
     
@@ -84,19 +88,19 @@ public class Padron {
             }
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Padron.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } catch (IOException ex) {
-            Logger.getLogger(Padron.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
     
     
     public static boolean InsertarComunidad(String[] campos, Session s)
-    {        
+    {
         ORM_Padron.Comunidad com = new Comunidad();
         com.setNomCom(campos[0]);
-
-        s.save(com);        
+        
+        s.save(com);
         
         return true;
     }
@@ -104,10 +108,14 @@ public class Padron {
     public static boolean InsertarProvincia(String[] campos, Session s)
     {        
         ORM_Padron.Provincia pro = new Provincia();
+        ORM_Padron.Comunidad com = s.get(ORM_Padron.Comunidad.class, Integer.parseInt(campos[2]));
+        
+        if(com == null)
+            return false;
         
         pro.setCodigoPostal(campos[0]);
         pro.setNomProv(campos[1]);
-        pro.setComunidad(new ORM_Padron.Comunidad(campos[2]));
+        pro.setComunidad(com);
         
         s.save(pro);        
         
@@ -119,7 +127,7 @@ public class Padron {
         ORM_Padron.Localidad loc = new Localidad();
         
         loc.setNomLoc("Torremolinos");
-        loc.setProvincia(new ORM_Padron.Provincia());
+        loc.setProvincia(new ORM_Padron.Provincia("29",new ORM_Padron.Comunidad("1"),"Málaga"));
         
         s.save(loc);        
         

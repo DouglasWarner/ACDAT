@@ -8,11 +8,9 @@ drop table if exists comunidad;
 
 create table comunidad(
     id_com integer not null auto_increment,
-    nom_com varchar(255) not null,
+    nom_com varchar(255) unique not null,
 
     primary key (id_com)
-
-
 );
 
 create table provincia(
@@ -23,7 +21,6 @@ create table provincia(
 
     primary key (codigo_postal),
     foreign key (id_comunidad) references comunidad(id_com) on update cascade
-    
 );
 
 create table localidad(
@@ -33,8 +30,6 @@ create table localidad(
 
     primary key (id_loc),
     foreign key (cod_provincia) references provincia (codigo_postal) on update cascade
-
-
 );
 
 create user 'padron'@'localhost' identified by 'padron';
