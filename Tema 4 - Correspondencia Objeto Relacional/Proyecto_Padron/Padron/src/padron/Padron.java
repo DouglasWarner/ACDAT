@@ -13,8 +13,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -124,12 +122,15 @@ public class Padron {
     
     public static boolean InsertarLocalidades(String[] campos, Session s)
     {        
-        ORM_Padron.Localidad loc = new Localidad();
+        for (int i = 0; i < campos.length; i++) 
+        {
+            ORM_Padron.Localidad loc = new Localidad();
         
-        loc.setNomLoc("Torremolinos");
-        loc.setProvincia(new ORM_Padron.Provincia("29",new ORM_Padron.Comunidad("1"),"Málaga"));
-        
-        s.save(loc);        
+            loc.setNomLoc(campos[i]);
+            loc.setProvincia(new ORM_Padron.Provincia("29",new ORM_Padron.Comunidad("1"),"Málaga"));
+
+            s.save(loc);
+        }                
         
         return true;
     }

@@ -1,4 +1,4 @@
-create database padron if not exists;
+create database if not exists padron;
 
 use padron;
 
@@ -8,10 +8,9 @@ drop table if exists comunidad;
 
 create table comunidad(
     id_com integer not null auto_increment,
-    nom_com varchar(255) not null,
+    nom_com varchar(255) unique not null,
 
-    primary key (id_com),
-    ##check (nom_com = UPPER(nom_com)) 
+    primary key (id_com)
 
 );
 
@@ -22,19 +21,14 @@ create table provincia(
     
 
     primary key (codigo_postal),
-    foreign key (id_comunidad) references comunidad(id_com) on update cascade,
-    
-    ##check (codigo_postal = UPPER(codigo_postal)),
-    ##check (nom_prov = UPPER(nom_prov))
+    foreign key (id_comunidad) references comunidad(id_com) on update cascade
 );
 
 create table localidad(
     id_loc integer not null auto_increment,
     nom_loc varchar(255) not null,
 
+
     primary key (id_loc),
-    foreign key (id_loc) references provincia (codigo_postal) on update cascade,
-
-    ##check (nom_loc = UPPER(nom_loc))
-
+    foreign key (id_loc) references provincia (codigo_postal) on update cascade
 );

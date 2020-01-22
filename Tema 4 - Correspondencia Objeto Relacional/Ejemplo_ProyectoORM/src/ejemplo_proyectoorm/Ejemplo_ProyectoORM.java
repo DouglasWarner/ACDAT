@@ -10,7 +10,6 @@ import ORM.Empleado;
 import ORM.Sede;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.exception.ConstraintViolationException;
 /**
  *
  * @author metho
@@ -25,19 +24,19 @@ public class Ejemplo_ProyectoORM {
             t = s.beginTransaction();
             
             ORM.Sede sede = new Sede("Málaga");
-            s.save(sede);
+            s.saveOrUpdate(sede);
             
             ORM.Departamento depart1 = new Departamento();
             depart1.setNomDepto("Recursos Humanos");
             depart1.setSede(sede);
             
-            s.save(depart1);
+            s.saveOrUpdate(depart1);
             
             ORM.Departamento depart2 = new Departamento();
             depart2.setNomDepto("Recursos Humanos");
             depart2.setSede(sede);
             
-            s.save(depart2);
+            s.saveOrUpdate(depart2);
             
             ORM.Empleado emp1_depart1 = new Empleado();
             ORM.Empleado emp2_depart1 = new Empleado();
@@ -48,8 +47,8 @@ public class Ejemplo_ProyectoORM {
             emp1_depart1.setDepartamento(depart1);
             emp2_depart1.setDepartamento(depart1);
             
-            s.save(emp1_depart1);
-            s.save(emp2_depart1);
+            s.saveOrUpdate(emp1_depart1);
+            s.saveOrUpdate(emp2_depart1);
             
             ORM.Empleado emp1_depart2 = new Empleado();
             ORM.Empleado emp2_depart2 = new Empleado();
@@ -60,8 +59,8 @@ public class Ejemplo_ProyectoORM {
             emp1_depart2.setDepartamento(depart2);
             emp2_depart2.setDepartamento(depart2);
             
-            s.save(emp1_depart2);
-            s.save(emp2_depart2);
+            s.saveOrUpdate(emp1_depart2);
+            s.saveOrUpdate(emp2_depart2);
             
             t.commit();
         }
