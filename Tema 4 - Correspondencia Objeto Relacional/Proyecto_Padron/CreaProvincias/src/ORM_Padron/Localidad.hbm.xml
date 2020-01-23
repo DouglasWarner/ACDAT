@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 9 Jan 2020, 13:22:06 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM_Padron.Localidad" table="localidad" catalog="padron" optimistic-lock="version">
+        <id name="idLoc" type="java.lang.Integer">
+            <column name="id_loc" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="provincia" class="ORM_Padron.Provincia" fetch="select">
+            <column name="cod_provincia" length="2" not-null="true" />
+        </many-to-one>
+        <property name="nomLoc" type="string">
+            <column name="nom_loc" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

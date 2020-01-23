@@ -32,6 +32,8 @@ create table localidad(
     foreign key (cod_provincia) references provincia (codigo_postal) on update cascade
 );
 
+create unique index i_pro_loc on localidad(cod_provincia, nom_loc);
+
 create user 'padron'@'localhost' identified by 'padron';
 
 grant all privileges on padron.* to 'padron'@'localhost';
