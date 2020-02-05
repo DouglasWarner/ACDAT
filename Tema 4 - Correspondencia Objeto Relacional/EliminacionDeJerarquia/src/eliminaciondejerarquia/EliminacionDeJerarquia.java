@@ -28,7 +28,7 @@ public class EliminacionDeJerarquia {
             String dniEmp = emp.getDni();
             String nomEmp = emp.getNomEmp();
             
-            ORM.Empleado_Plantilla empPla = new Empleado_Plantilla(dniEmp, nomEmp, 25);
+            ORM.Empleado_Plantilla empPla = new Empleado_Plantilla("25755584X", "Pepe", 25);
             s.save(empPla);
             String dniEmpPla = empPla.getDni();
             
@@ -36,7 +36,7 @@ public class EliminacionDeJerarquia {
             empPla = (ORM.Empleado_Plantilla) s.load(ORM.Empleado_Plantilla.class, dniEmpPla);
             
             System.out.println("Empleado ["+emp.getDni() + "] "+ emp.getNomEmp());
-            System.out.println("Empleado Plantilla ["+empPla.getDni() + "] ("+ empPla.getNomEmp() +"; "+empPla.getNumemp()+")");
+            System.out.println("Empleado Plantilla ["+empPla.getDni() + "] ("+ empPla.getNomEmp() +"; "+empPla.getNumEmp()+")");
             
             t.commit();
         }catch(Exception e)

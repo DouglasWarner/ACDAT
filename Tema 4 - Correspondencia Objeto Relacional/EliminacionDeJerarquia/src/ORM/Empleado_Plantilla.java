@@ -21,11 +21,11 @@ public class Empleado_Plantilla extends Empleado implements java.io.Serializable
         this.numEmp = numEmp;
     }
 
-    public Integer getNumemp() {
+    public Integer getNumEmp() {
         return numEmp;
     }
 
-    public void setNumemp(Integer numEmp) {
+    public void setNumEmp(Integer numEmp) {
         this.numEmp = numEmp;
     }
     

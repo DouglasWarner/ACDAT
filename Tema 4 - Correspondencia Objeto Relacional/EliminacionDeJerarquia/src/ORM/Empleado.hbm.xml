@@ -44,7 +44,7 @@ Contributor(s):
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-<class name="ORM.Empleado" table="empleado" catalog="empresa1" discriminator-value="tipo">
+  <class name="ORM.Empleado" table="empleado" catalog="empresa1" discriminator-value="E">
     <id name="dni" type="java.lang.String">
       <column name="dni"/>
       <generator class="assigned"/>
@@ -53,7 +53,7 @@ Contributor(s):
     <property name="nomEmp" type="string">
       <column name="nomEmp" length="255"/>
     </property>
-    <subclass name="ORM.Empleado_Plantilla" discriminator-value="tipo">
+    <subclass name="ORM.Empleado_Plantilla" discriminator-value="EP">
       <property name="numEmp" type="integer">
         <column name="numEmp" length="9"/>
       </property>
