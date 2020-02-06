@@ -1,13 +1,19 @@
-drop table if exists empleado;
+create database empresa2;
+
 drop table if exists empleado_plantilla;
+drop table if exists empleado;
 
 create table empleado (
     dni char(9) not null,
-    nom_emp varchar(255) not null,
-    num_emp char(9),
-    tipo enum('E','EP') not null,
+    nomEmp varchar(255) not null,
+
+    primary key (dni)
+);
+
+create table empleado_plantilla (
+    dni char(9) not null,
+    numEmp char(9) not null,
 
     primary key (dni),
-    constraint check_tipos check((tipo='E' and isnull(num_emp)) 
-                            or (tipo='EP' and not(isnull(num_emp)))
+    foreign key (dni) references empleado(dni) on update cascade
 );

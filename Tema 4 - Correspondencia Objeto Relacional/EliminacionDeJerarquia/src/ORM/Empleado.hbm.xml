@@ -44,7 +44,7 @@ Contributor(s):
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="ORM.Empleado" table="empleado" catalog="empresa1" discriminator-value="E">
+  <class name="ORM.Empleado" table="empleado" catalog="empresa" discriminator-value="E">
     <id name="dni" type="java.lang.String">
       <column name="dni"/>
       <generator class="assigned"/>
