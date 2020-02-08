@@ -1,6 +1,7 @@
 drop table if exists datosProf;
 drop table if exists asigProyecto;
 drop table if exists proyecto;
+drop table if exists emp_plantilla;
 drop table if exists empleado;
 
 create table if not exists empleado(
@@ -8,6 +9,14 @@ create table if not exists empleado(
 	nom_Emp varchar(200) not null,
 
 	primary key (dni)
+);
+
+create table if not exists emp_plantilla(
+	dni char(9) not null,
+	num_Emp char(9) not null,
+
+	primary key (dni),
+	foreign key (dni) references empleado(dni) on update cascade
 );
 
 create table if not exists proyecto(
@@ -18,7 +27,8 @@ create table if not exists proyecto(
 	dni_Jefe_Proy char(9) not null,
 
 	primary key (id_Proy),
-	foreign key (dni_Jefe_Proy) references empleado (dni) on update cascade
+	foreign key (dni_Jefe_Proy) references emp_plantilla(dni) on update cascade
+	##foreign key (dni_Jefe_Proy) references empleado(dni) on update cascade
 );
 
 create table if not exists asigProyecto(
@@ -32,14 +42,14 @@ create table if not exists asigProyecto(
 	foreign key (id_Proy) references proyecto (id_Proy) on update restrict
 );
 
-##create table if not exists datosProf(
-##	dni char(9) not null,
-##	categoria char(2) not null,
-##	sueldo_Bruto_Anual decimal(8,2),
-##
-##	primary key (dni),
-##	foreign key (dni) references empleado(dni)
-##);
+create table if not exists datosProf(
+	dni char(9) not null,
+	categoria char(2) not null,
+	sueldo_Bruto_Anual decimal(8,2),
+
+	primary key (dni),
+	foreign key (dni) references empleado(dni)
+);
 
 ##create user 'gestionproy'@'%' identified by 'gestionproy';
 

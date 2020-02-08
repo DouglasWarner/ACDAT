@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 6 feb. 2020 21:57:32 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.Asigproyecto" table="asigproyecto" catalog="gestionproyecto" optimistic-lock="version">
+        <composite-id name="id" class="ORM.AsigproyectoId">
+            <key-property name="FInicio" type="date">
+                <column name="f_Inicio" length="10" />
+            </key-property>
+            <key-property name="dniEmp" type="string">
+                <column name="dni_Emp" length="9" />
+            </key-property>
+            <key-property name="idProy" type="int">
+                <column name="id_Proy" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="empleado" class="ORM.Empleado" update="false" insert="false" fetch="select">
+            <column name="dni_Emp" length="9" not-null="true" />
+        </many-to-one>
+        <many-to-one name="proyecto" class="ORM.Proyecto" update="false" insert="false" fetch="select">
+            <column name="id_Proy" not-null="true" />
+        </many-to-one>
+        <property name="FFin" type="date">
+            <column name="f_Fin" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
