@@ -1,0 +1,1 @@
+5. Crea un programa que, para varias asignaciones  cualesquiera de empleados a proyectos, les asigne como fecha de fin una fecha en el pasado (por ejemplo, el día anterior a la fecha actual).

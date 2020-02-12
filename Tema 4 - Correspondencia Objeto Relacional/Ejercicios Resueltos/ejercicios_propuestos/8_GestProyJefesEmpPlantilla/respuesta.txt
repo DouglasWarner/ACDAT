@@ -1,0 +1,164 @@
+Este es un ejercicio interesante porque plantea el escenario del cambio del modelo conceptual (diagrama E-R), que se traduce en el cambio del modelo de datos (esquema relacional), y por último en la aplicación. Esto implica la conversión de los datos al nuevo modelo, utilizando sentencias de SQL, y los posteriores cambios en la aplicación, que en este caso pasan por establecer una nueva correspondencia objeto-relacional. Bien es cierto que los cambios son localizados, pero muy significativos. Además no todos los cambios en la correspondencia se pueden hacer automáticamente utilizando los asistentes, dado que se introduce una relación jerárquica entre la clase Empleado y una nueva subclase suya EmpleadoPlantilla. Los ficheros de correspondencia hbm para esta relación deben crearse a mano, como en los ejemplos incluidos en el texto.
+
+Lo primero es decidir cómo se va a traducir la relación jerárquica entre las entidades EMPLEADO y EMP_PLANTILLA al modelo relacional. Hay que elegir entre una de las dos posibilidades explicadas en el texto: una única tabla para toda la jerarquía o una tabla para la superclase y otra para la subclase. Para tomar la decisión más correcta hay que tener en cuenta los aspectos específicos del caso, en particular las relaciones de la superclase y la subclase con otras clases. En el nuevo modelo E-R, tanto la entidad EMPLEADO como su subordinada EMP_PLANTILLA tienen relaciones con otras entidades. Por lo tanto, lo más conveniente es la creación de una tabla para cada una de las entidades, relacionadas entre sí por una relación de uno a uno, que debe reflejarse mediante un fichero de correspondencia creado manualmente, tal como se explica en un ejemplo del tema.
+
++===============================+
+|  CAMBIOS EN LA BASE DE DATOS  |
++===============================+
+
+0) El paso previo es la creación de una nueva base de datos como copia de la anterior orm_gestion_proyectos. Se puede hacer desde un entorno con interfaz de usuario gráfico, tal como phpMyAdmin. Pero por si no se tiene, se indican las sentencias de SQL para hacerlo. Para ejecutarlas en Windows normalmente habrá que situarse en el directorio donde está instalado MySQL 8.0, que normalmente es C:\Program Files\MySQL\MySQL Server 8.0\bin. En Linux se pueden ejecutar los comandos mysql y mysqldump desde cualquier directorio.
+
+Para hacer una copia de seguridad de la base de datos ORM_gestion_proyectos en un fichero ORM_gestion_proyectos.sql se hace así:
+
+mysqldump -u root -p ORM_gestion_proyectos > ORM_gestion_proyectos.dump.sql
+
+Con esto se obtiene un fichero con comandos en SQL para crear las tablas y los contenidos. Ahora creamos una nueva base de datos orm_gest_proy y un usuario con igual nombre, y otorgamos permisos al usuario sobre la base de datos, con los siguientes comandos ejecutados como root.
+
+mysql> create database orm_gest_proy;
+mysql> create user 'orm_gest_proy'@'localhost' IDENTIFIED BY '(password)';
+mysql> grant select,insert,update,delete,create,drop,execute on orm_gest_proy.* TO 'orm_gest_proy'@'localhost';
+
+Ahora se sale del intérprete de SQL con quit, y una vez en la línea de comandos se ejecuta el siguiente comando para restaurar los contenidos de la antigua base de datos en la nueva. Lo que se hace es ejecutar en la nueva base de datos los comandos de SQL generados por mysqldump y guardados en el fichero ORM_gestion_proyectos.dump.sql.
+
+mysql -u root -p orm_gest_proy < ORM_gestion_proyectos.dump.sql
+
+Ahora se puede entrar con el nuevo usuario orm_gest_proy y verificar que se ha restaurado correctamente la base de datos:
+
+mysql -u orm_gest_proy -p
+
+Una vez dentro ejecutamos:
+
+use orm_gest_proy
+show tables
+select * from proyecto
+
+(etc)
+
+1) Traducción de la relación de herencia al modelo relacional.
+
+Como se ha comentado, se creará una nueva tabla empleado_plantilla para la entidad EMP_PLANTILLA, relacionada con la entidad EMPLEADO mediante una relación de uno a uno, que se refleja mediante una clave foránea de empleado_plantilla hacia empleado. En esta tabla se guarda el número de empleado.
+
++---------------------------------------------------------------------+
+  create table empleado_plantilla(                                    
+    dni char(9) not null,
+    num_emp integer not null,
+    primary key(dni),                                             
+    foreign key fk_emp_plant_empleado(dni) references empleado(dni)   
+  );                                                                  
++---------------------------------------------------------------------+
+
+
+Ahora hay que pasar a la tabla empleado_plantilla todos los empleados de la tabla emplado. Hay que asignar a cada uno un número de empleado. Para hacerlo sencillo, se le asigna el DNI eliminando la letra. En un caso real probablemente el número para cada uno se proporcionaría de alguna otra manera y habría que establecer un procedimiento apropiado para asignar a cada uno el que le corresponda.
+
++------------------------------------------------------------------------------------------------------+
+  insert into empleado_plantilla(dni,num_emp) select dni,substring(dni,1,length(dni)-1) from empleado;
++------------------------------------------------------------------------------------------------------+
+
+2) Cambio de clave foránea de jefe de proyecto de empleado(dni) a empleado_plantilla(num_emp_jefe_proy)
+
+La clave foránea de proyecto a empleado debe cambiarse a la tabla empleado_plantilla.
+
+Se puede empezar borrando la antigua clave foránea. Si no recordamos su nombre, podemos ejecutar el comando:
+
++------------------------------+
+  show indexes from proyecto;
++------------------------------+
+
+Podemos ver que el nombre es fk_proy_jefe. La eliminamos con el siguiente comando:
+
++-----------------------------------------------------+
+  alter table proyecto drop foreign key fk_proy_jefe;
++-----------------------------------------------------+
+
+Ahora se puede crear la nueva. Se crea con un nombre distinto.
+
++-----------------------------------------------------------------------------------------------------------------------------+
+  alter table proyecto add constraint fk_proyecto_emp_plant foreign key(dni_jefe_proy) references empleado_plantilla(dni);
++-----------------------------------------------------------------------------------------------------------------------------+
+
+
++===============================================+
+| CREACIÓN DE LA CONEXIÓN CON LA BASE DE DATOS  |
++===============================================+
+
+Se empieza creando una conexión a la base de datos orm_gest_proy, con igual nombre, para el usuario de igual nombre al que se le han dado permisos sobre ella.
+
++==================================================================+
+| CORRESPONDENCIA OBJETO-RELACIONAL PARA NUEVO ESQUEMA RELACIONAL  |
++==================================================================+
+
+Primero se genera automáticamente la correspondencia mediante los asistentes de Hibernate.
+Dado que se van a hacer cambios manuales sobre los POJOs y sobre algunos ficheros de correspondencia, en el asistente para la generación de POJOs y ficheros de correspondencia, no se selecciona la opción de crear anotaciones de EJB (es decir, de JPA), porque los cambios manuales en los ficheros de correspondencia introducirán inconsistencias entre estos y las anotaciones. De todas formas, las anotaciones no se utilizarán.
+
+Despues de eso solo falta crear manualmente la correspondencia para la relación de herencia entre las clases Empleado y EmpleadoPlantilla. Para ello hay que hacer cambios en ficheros de correspondencia y en clases.
+
+* Cambios en las clases
+
+Hay que editar manualmente la clase EmpleadoPlantilla para hacer lo siguiente:
+
+- Añadir extends Empleado en la definición.
+- Eliminar el miembro de datos private String dni y sus getters y setters. Todo esto se hereda ahora de la nueva clase padre Empleado.
+- Eliminar el miembro de datos private Empleado empleado y sus getters y setters. Estos se han introducido por la clave foránea de empleado_plantilla a empleado, pero esta relación se va a gestionar mediante la relación de herencia que se va a establecer mediante los ficheros de correspondencia.
+
+
+* Cambios en los ficheros de correspondencia
+
+- Se hace una copia en otra parte del fichero de correspondencia EmpleadoPlantilla.hbm.xml antes de eliminarlo del proyecto, porque sus contenidos se van a incorporar en Empleado.hbm.xml.
+
+- El elemento <class> de EmpleadoPlantilla.hbm.xml se copia dentro del elemento del mismo nombre de Empleado.hbm.xml, y se renombra como <joined-subclass>. Se debe eliminar su atributo optimistic-lock, porque si no se producirá un error al compilar el proyecto.
+
+- Dentro del nuevo elemento <joined-subclass> se añade al principio <key column="dni"/>, para enlazar con la superclase Empleado.
+
+- Dentro del nuevo elemento <joined-subclass name="ORM.EmpleadoPlantilla"> se elimina el elemento <id name="dni"> y <one-to-one name="empleado>. El identificador será el de la clase padre Empleado, y la antigua relación de uno a uno con ella ya no es de aplicación. El fichero Empleado.hbm.xml queda así:
+
+============================================================================
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 15-abr-2019 12:17:26 by Hibernate Tools 4.3.1
+  Modificado manualmente para subclase EmpleadoPlantilla
+-->
+<hibernate-mapping>
+    <class name="ORM.Empleado" table="empleado" catalog="orm_gest_proy" optimistic-lock="version">
+        <id name="dni" type="string">
+            <column name="dni" length="9" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomEmp" type="string">
+            <column name="nom_emp" length="32" not-null="true" />
+        </property>
+        <set name="asigProyectos" table="asig_proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dni_emp" length="9" not-null="true" />
+            </key>
+            <one-to-many class="ORM.AsigProyecto" />
+        </set>
+        <one-to-one name="datosProf" class="ORM.DatosProf"></one-to-one>
+        <joined-subclass name="ORM.EmpleadoPlantilla" table="empleado_plantilla" catalog="orm_gest_proy">
+            <key column="dni"/>
+            <property name="numEmp" type="int">
+                <column name="num_emp" not-null="true" />
+            </property>
+            <set name="proyectos" table="proyecto" inverse="true" lazy="true" fetch="select">
+                <key>
+                    <column name="dni_jefe_proy" length="9" not-null="true" />
+                </key>
+                <one-to-many class="ORM.Proyecto" />
+            </set>
+        </joined-subclass>
+    </class>
+</hibernate-mapping>
+============================================================================
+
+De todas formas, este último está en el proyecto, y los ficheros antiguos Empleado.hbm.xml y EmpleadoPlantilla.hbm.xml están en un directorio llamado antiguo.
+
+* Cambios en la configuración del proyecto.
+
+Hay que editar el fichero de configuración hibernate.cfg.xml para eliminar la línea:
+
+    <mapping resource="ORM/EmpleadoPlantilla.hbm.xml"/>
+
+
+El jefe de proyecto para un proyecto antes se obtenía con getEmpleado, y ahora con getEmpleadoPlantilla. No es un nombre muy significativo. Podría crearse un método getJefeProyecto() que devolviera getEmpleadoPlantilla().
+
+

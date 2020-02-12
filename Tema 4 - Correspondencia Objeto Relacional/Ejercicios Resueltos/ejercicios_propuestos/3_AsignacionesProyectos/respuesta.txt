@@ -1,0 +1,18 @@
+1) Se copia el proyecto resultante del ejercicio anterior.
+
+2) Se crea la tabla en la base de datos, ejecutando la siguiente sentencia de SQL como root en MySQL.
+
+create table asig_proyecto(
+  dni_emp char(9),
+  id_proy integer not null,
+  f_inicio date not null,
+  f_fin date,
+  primary key(dni_emp, id_proy, f_inicio),
+  foreign key f_asig_emp(dni_emp) references empleado(dni),
+  foreign key f_asig_proy(id_proy) references proyecto(id_proy)
+);
+
+
+3) Se ejecuta el asistente "Hibernate Mapping Files and POJOs from Database".
+
+Hibernate configuration fails with message: resource: ORM/Proyecto.hbm.xml not found see message.log for exception details.

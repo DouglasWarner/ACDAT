@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-abr-2019 17:51:41 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.Proyecto" table="proyecto" catalog="orm_gestion_proyectos" optimistic-lock="version">
+        <id name="idProy" type="int">
+            <column name="id_proy" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="empleado" class="ORM.Empleado" fetch="select">
+            <column name="dni_jefe_proy" length="9" not-null="true" />
+        </many-to-one>
+        <property name="nomProy" type="string">
+            <column name="nom_proy" length="32" not-null="true" />
+        </property>
+        <property name="FInicio" type="date">
+            <column name="f_inicio" length="10" not-null="true" />
+        </property>
+        <property name="FFin" type="date">
+            <column name="f_fin" length="10" />
+        </property>
+        <set name="asigProyectos" table="asig_proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proy" not-null="true" />
+            </key>
+            <one-to-many class="ORM.AsigProyecto" />
+        </set>
+    </class>
+</hibernate-mapping>

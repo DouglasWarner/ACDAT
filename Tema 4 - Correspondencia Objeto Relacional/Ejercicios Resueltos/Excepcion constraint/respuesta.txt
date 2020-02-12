@@ -1,0 +1,195 @@
+* Ejecuta otra vez el programa de ejemplo, y verifica si se produce alguna excepción. Localiza el tipo de excepción.
+
+Según los logs, se produce una excepción de tipo org.hibernate.exception.ConstraintViolationException 
+al intentar añadir un nuevo empleado con DNI '36925814G'. Esto es porque ya existe una fila con ese valor 
+para el campo DNI, y ese campo es clave primaria. 
+
+ERROR: Duplicate entry '36925814G' for key 'PRIMARY'
+(fecha) org.hibernate.internal.ExceptionMapperStandardImpl mapManagedFlushFailure
+ERROR: HHH000346: Error during managed flush [org.hibernate.exception.ConstraintViolationException: could not execute statement]
+javax.persistence.PersistenceException: org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:154)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:181)
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:188)
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1460)
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:511)
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:3283)
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:2479)
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:473)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:178)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.access$300(JdbcResourceLocalTransactionCoordinatorImpl.java:39)
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:271)
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:98)
+	at creacionsedesempleados.CreacionSedesEmpleados.main(CreacionSedesEmpleados.java:70)
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:59)
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:42)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:113)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:99)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:178)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3167)
+	at org.hibernate.persister.entity.AbstractEntityPersister.insert(AbstractEntityPersister.java:3682)
+	at org.hibernate.action.internal.EntityInsertAction.execute(EntityInsertAction.java:90)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:604)
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:478)
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:356)
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:39)
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1454)
+	... 9 more
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '36925814G' for key 'PRIMARY'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:115)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:95)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:960)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1116)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1066)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1396)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:1051)
+	at com.mchange.v2.c3p0.impl.NewProxyPreparedStatement.executeUpdate(NewProxyPreparedStatement.java:384)
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:175)
+	... 17 more
+
+* Cambia el programa para que este tipo de excepción se gestione de manera separada y se 
+proporcione una información más concisa pero suficiente, en lugar de la muy prolija proporcionada por printStackTrace().
+
+Se trata de capturar la excepción de tipo Exception, como se está haciendo ahora.
+Pero gestionar subtipos particulares de ella. No se puede capturar directamente una 
+excepción del tipo ConstraintViolationException. En lugar de ello, hay que aplicar repetidamente 
+el método getCause() hasta obtener una de ese tipo o hasta obtener el valor null.
+Con la siguiente mejora, se pueden gestionar tanto excepciones de tipo ConstraintViolationException 
+como excepciones originadas inicialmente a partir de una excepción de ese tipo.
+
+==============================
+        catch (Exception e) {
+            System.err.println("---- Pila de excepciones INICIO ----");
+            System.err.println("[superior]" + e.getClass().toString());
+            Throwable th = e;
+            int i=1;
+            while ((th != null) && !(th instanceof ConstraintViolationException)) {
+                th = th.getCause();
+                System.err.println("[-" + (i++) + "]" + th.getClass().toString());
+            }
+            System.err.println("---- Pila de excepciones: FIN   ----");
+            if (th instanceof ConstraintViolationException) {
+                ConstraintViolationException cve = (ConstraintViolationException) th;
+                System.err.println("===================================");
+                System.err.println("Excepción de Hibernate de tipo " + cve.getClass().getName() + ": [" + cve.getMessage() + "]");
+                System.err.println("Sentencia SQL: " + cve.getSQL());
+                System.err.println("Restricción violada: " + cve.getConstraintName());
+                System.err.print("Error de la excepción SQLException: ");
+                System.err.println(cve.getSQLException().getMessage());
+                System.err.println("===================================");
+            } else {
+                e.printStackTrace(System.err);
+            }
+            if (t != null) {
+                t.rollback();
+            }
+        }
+==============================
+
+El proyecto para este nuevo programa es 2_ExcepcionesRestricInteg.
+
+La salida del programa es, en lugar de la pila de excepciones que muestra printStackTrace(), la siguiente.
+
+---- Pila de excepciones INICIO ----
+[superior]class javax.persistence.PersistenceException
+[-1]class org.hibernate.exception.ConstraintViolationException
+---- Pila de excepciones: FIN   ----
+===================================
+Excepción de Hibernate de tipo org.hibernate.exception.ConstraintViolationException: [could not execute statement]
+Sentencia SQL: n/a
+Restricción violada: PRIMARY
+Error de la excepción SQLException: Duplicate entry '36925814G' for key 'PRIMARY'
+===================================
+
+
+El método getSQL() no obtiene la sentencia de SQL, y no es en principio sencillo obtenerla.
+
+* Haz que no puedan existir dos sedes distintas con idéntico nombre, y que no puedan existir dos departamentos distintos con idéntico nombre en una misma sede. La manera más sencilla es con índices únicos (sentencia CREATE UNIQUE INDEX de SQL). Verifica tu solución, utilizando el programa de ejemplo inicial o pequeñas variaciones de él. Hay que introducir esta restricción en la propia base de datos, y hay que verificar que, en el caso en que se intenta crear una nueva sede con el mismo nombre que una ya existente, y el caso en que se intenta crear un nuevo departamento en una sede con el mismo nombre que un departamento ya existente en esa sede, se produce una excepción y el programa la gestiona adecuadamente.
+
+Las restricciones que hay que introducir en la base de datos consisten en la creación de índices únicos. Se puede hacer como sigue (probablemente será necesario hacerlo como usuario root, y no se pueda como el usuario libro_ad):
+
+CREATE UNIQUE INDEX i_sede_nombre ON sede(nom_sede);
+CREATE UNIQUE INDEX i_departamento_nombre ON departamento(id_sede, nom_depto);
+
+Se pueden consultar los índices para estas tablas con:
+
+SHOW INDEX FROM sede;
+SHOW INDEX FROM departamento;
+
+Se puede ver que para cada una existe un índice asociado a la clave primaria y además el que se acaba de crear. Para departamento existe además uno asociado a la clave foránea fk_depto_sede.
+
+Y se podrían eliminar (no hay que hacerlo, es solo para información) con:
+
+drop index i_sede_nombre on sede;
+drop index i_departamento_nombre on departamento;
+
+Para ver qué tipo de excepciones sucede, podemos utilizar el mismo programa anterior. En este caso, antes de producirse una excepción por duplicidad de clave primaria al crear un nuevo empleado, se producirá una excepción por duplicidad de nombre para una sede. Esta es la información que el programa muestra al respecto. Se puede ver que la excepción de tipo ConstraintViolationException está en el tope de la pila, por lo que se podría capturar directamente con catch(ConstraintViolationException)
+
+---- Pila de excepciones INICIO ----
+[superior]class org.hibernate.exception.ConstraintViolationException
+---- Pila de excepciones: FIN   ----
+===================================
+Excepción de Hibernate de tipo org.hibernate.exception.ConstraintViolationException: [could not execute statement]
+Sentencia SQL: n/a
+Restricción violada: i_sede_nombre
+Error de la excepción SQLException: Duplicate entry 'ALBACETE' for key 'i_sede_nombre'
+===================================
+
+Faltan por verificar las excepciones que se producen cuando se crea un departamento para una sede con el mismo nombre que otro departamento ya existente en la sede. Para eso se hará un programa de prueba que crea una sede con el mismo nombre que otra ya existente, y depués una nueva sede con un nombre nuevo, y después dos departamentos con el mismo nombre para esta última sede. Pero cada una de estas operaciones está en su propio bloque try ...catch. Por lo tanto, si se produce alguna excepción, se hace rollback pero se sigue adelante.
+
+try {
+  1) crea sede con nombre de otra que ya existe.
+}
+catch(Exception e) {
+  rollback();
+}
+try {
+  2) crea sede con nombre nuevo
+}
+catch(Exception e) {
+  rollback();
+}
+try {
+  3) crea departamento para sede anterior
+}
+catch(Exception e) {
+  rollback();
+}
+try {
+  4) crea departamento para sede anterior, pero con el mismo nombre del departamento antes creado
+}
+catch(Exception e) {
+  rollback();
+}
+
+El paso 1) falla por violación del índice único i_sede_nombre
+El paso 4) falla por violación del índice únido i_departamento_nombre
+
+La salida del programa es conforme a lo previsto, y es la siguiente:
+
+(fecha y hora) org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: Duplicate entry 'ALBACETE' for key 'i_sede_nombre'
+---- Pila de excepciones INICIO ----
+[superior]class org.hibernate.exception.ConstraintViolationException
+---- Pila de excepciones: FIN   ----
+===============(1)=================
+Excepción de Hibernate de tipo org.hibernate.exception.ConstraintViolationException: [could not execute statement]
+Sentencia SQL: n/a
+Restricción violada: i_sede_nombre
+Error de la excepción SQLException: Duplicate entry 'ALBACETE' for key 'i_sede_nombre'
+===================================
+(fecha y hora) org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+WARN: SQL Error: 1062, SQLState: 23000
+abr 09, 2019 8:57:46 PM org.hibernate.engine.jdbc.spi.SqlExceptionHelper logExceptions
+ERROR: Duplicate entry '30-RECURSOS HUMANOS' for key 'i_departamento_nombre'
+---- Pila de excepciones INICIO ----
+[superior]class org.hibernate.exception.ConstraintViolationException
+---- Pila de excepciones: FIN   ----
+===============(4)=================
+Excepción de Hibernate de tipo org.hibernate.exception.ConstraintViolationException: [could not execute statement]
+Sentencia SQL: n/a
+Restricción violada: i_departamento_nombre
+Error de la excepción SQLException: Duplicate entry '30-RECURSOS HUMANOS' for key 'i_departamento_nombre'
+===================================

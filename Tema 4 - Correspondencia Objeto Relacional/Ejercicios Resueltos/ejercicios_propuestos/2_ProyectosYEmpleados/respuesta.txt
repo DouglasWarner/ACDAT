@@ -1,0 +1,137 @@
+A continuación las sentencias de SQL que hay que ejecutar para crear las tablas empleado y proyecto. Hay que ejecutarlas como usuario root de MySQL.
+
+===============================================
+use orm_gestion_proyectos;
+
+create table empleado(
+  dni char(9) not null,
+  nom_emp varchar(32) not null,
+  primary key(dni)
+);
+
+create table proyecto(
+  id_proy integer auto_increment not null,
+  nom_proy varchar(32) not null,
+  f_inicio date not null,
+  f_fin date,
+  dni_jefe_proy char(9) not null,
+  primary key(id_proy),
+  foreign key fk_proy_jefe(dni_jefe_proy) references empleado(dni)
+);
+
+===============================================
+
+Se crea conexión con usuario: orm_gestion_proyectos, contraseña que corresponda. Driver para la base de datos MySQL 8.0. URL de conexión jdbc:mysql://localhost:3306/orm_gestion_proyectos?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
+Se siguen las instrucciones para, con ayuda de los asistentes (wizards) crear fichero de configuración hibernate.cfg.xml, de ingeniería inversa hibernate.reveng.xml, ficheros de correspondencia y POJOs a partir de la base de datos, seleccionando tablas proyecto y empleado, y por último, fichero HibernateUtil.java.
+
+Se siguen las instrucciones para eliminar del proyecto los JAR de Hibernate y añadir en su lugar los correspondientes a una versión más reciiente de Hibernate. Se añade también el JAR del driver para la base de datos MySQL 8.0.
+Es conveniente situar estos en un directorio lib creado para todas las actividades y ejercicios de este tema y seleccionar la opción de utilizar rutas relativas, y no absolutas.
+
+Después de todo lo anterior, ya se puede incluir el código del programa en el método main() y compilar.
+
+Si al ejecutar el programa se produce una excepción de tipo, ver más adelante nota respecto a claves autogeneradas que explica el problema y cómo solucionarlo.
+
+Se incluyen en el programa dos líneas con un comentario que incluye, respectivamente, @prueba1 y @prueba2.
+Si se comenta cualquiera de ellas, se produce un error (proyecto sin fecha de inicio o proyecto sin jefe de proyecto).
+
+Si se comenta la primera:
+org.hibernate.PropertyValueException: not-null property references a null or transient value : ORM.Proyecto.FInicio
+(Es decir, la fecha de inicio FInicio de la clase ORM.Proyecto debe estar definida).
+
+Si se comenta la segunda:
+org.hibernate.PropertyValueException: not-null property references a null or transient value : ORM.Proyecto.empleado
+(Es decir, el jefe de proyecto empleado de la clase ORM.Proyecto debe estar definido)
+
+Tras la ejecución del programa se tiene:
+
+mysql> select  * from empleado;
++-----------+----------+
+| dni       | nom_emp  |
++-----------+----------+
+| 09876543K | LAMIQUIZ |
+| 78901234X | NADALES  |
+| 89012345E | ROJAS    |
++-----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select  * from proyecto;
++---------+-------------------+------------+-------+---------------+
+| id_proy | nom_proy          | f_inicio   | f_fin | dni_jefe_proy |
++---------+-------------------+------------+-------+---------------+
+|       3 | PAPEL ELECTRÓNICO | 2018-11-30 | NULL  | 78901234X     |
+|       4 | TINTA_HOLOGRÁFICA | 2021-09-30 | NULL  | 89012345E     |
+|       5 | RUEDAS CUADRADAS  | 2021-12-27 | NULL  | 09876543K     |
++---------+-------------------+------------+-------+---------------+
+3 rows in set (0.00 sec)
+
+
+------------- (Incidencia: claves autogeneradas para Proyecto) ----------------
+Inicialmente me daba un error:
+
+org.hibernate.NonUniqueObjectException: A different object with the same identifier value was already associated with the session : [ORM.Proyecto#0]
+
+El motivo era que se había definido de esta forma la generación de claves para clase Proyecto:
+
+        <id name="idProy" type="int">
+            <column name="id_proy" />
+            <generator class="assigned" />
+        </id>
+
+Se cambia "assigned" por "identity", se recompila el proyecto y funciona. Así que ... los asistentes ayudan, pero puede ser necesario revisar los ficheros de correspondencia que han generado y hacer modificaciones sobre ellos.
+
+
+------------- (Incidencia: grabación de fechas en la base de datos ) -----------
+
+Las fechas salen un día antes de lo indicado. Esto lo conocemos de un ejercicio del tema 3. Se copia a continuación la explicación dada para la resolución de ese ejercicio:
+
+
+[===== INCIO: grabación de fechas con JDBC
+Por último, un detalle de implementación, respecto a la grabación de las fechas en la base de datos. Se utiliza, en general, la clase java.sql.Date en lugar de java.util.Date, de la que la primera es subclase. java.sql.Date es subclase de java.util.Date, y la diferencia fundamental entre ambase es que la primera solo guarda la fecha, mientras que la primera guarda también la hora.
+Y una cosa importante, para grabar correctamente la fecha, se hace así:
+
+   s.setDate(++i, this.fInicio, Calendar.getInstance());
+
+Si no se añade el último parámetro, Calendar.getInstance(), la fecha que se graba es un día anterior a la fecha proporcionada.
+FIN: grabación de fechas con JDBC =====]
+
+La cuestión es cómo se puede conseguir que Hibernate grabe las fechas correctamente. No es en la clase Proyecto ni en ningún POJO donde se graban los datos en la base de datos.
+
+En el siguiente enlace hay una discusión al respecto.
+
+https://hibernate.atlassian.net/browse/HHH-11396
+
+La cuestión de fondo es una discrepancia entre las zonas horarias (timezones o TZ) del servidor de base de datos y la máquina virtual de Java (JVM). En la URL de conexión para MySQL 8.0 se especificó como zona horaria para el servidor UTC (serverTimezone=UTC), para evitar un problema que impedía la conexión.
+
+jdbc:mysql://localhost:3306/orm_gestion_proyectos?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
+Esta es una cuestión compleja porque entran en juego las diferencias horarias y las zonas horarias configuradas en tres lugares:
+
+1) Servidor de bases de datos.
+2) Máquina virtual de Java que ejecuta la aplicación.
+3) Hibernate.
+
+Además entran en juego aspectos del lenguaje Java (clase java.util.Date, cuyo uso está desaconsejado, muchos de cuyos métodos están "deprecated" pero que se usa en los POJO generados por los asistentes correspondientes a la versión 4.3 de Java, aunque no parece ser este el origen de los problemas). Y también aspectos de JDBC, porque utiliza su propia clase java.sql.Date, hija de java.util.Date, y porque ya se vio que este mismo problema se puede reproducir con un programa basado en JDBC(y por cierto, se proporcionó una solución, como se ha explicado anteriormente).
+
+Hay varios comentarios de Vlad Mihalcea en la discusión disponible en el enlace anterior que sugieren varias posibles soluciones. Se podría plantear alguna actividad de amplicación para discutir la viabilidad e implicaciones de diversas posibles soluciones, pero cae con mucho fuera de los objetivos de este libro.
+
+a) ------------ (Configuración de Hibernate) -----------------
+Vlad Mihalcea añadió un comentario - 07/mar/2017 02:26 AM
+
+Since Hibernate 5.2.3, you can also use the hibernate.jdbc.time_zone configuration property which is described in great detail in this article.
+
+In your case, the property should be set like this:
+
+<property
+    name="hibernate.jdbc.time_zone"
+    value="Europe/Berlin"
+/>
+
+b) ----- (Configuración de JVM, máquina virtual de Java) -----
+
+So, you have two ways to fix this issue:
+
+    Either, you remove the serverTimezone property from the MySQL URL
+    Or, you keep the serverTimezone property, but then you need to set the JVM timezone to the same TZ.
+
+

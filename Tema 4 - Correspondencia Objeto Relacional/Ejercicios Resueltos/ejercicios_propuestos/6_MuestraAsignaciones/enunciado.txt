@@ -1,0 +1,1 @@
+6. Crea un programa que, utilizando una sentencia de HQL, muestre los detalles de todas las asignaciones de empleados a proyectos.

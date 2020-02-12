@@ -1,0 +1,1 @@
+7. Lo mismo que en la actividad anterior, pero solo para asignaciones vigentes. Es decir, no se deben mostrar asignaciones cuya fecha de inicio esté en el futuro ni asignaciones cuya fecha de fin esté informada y esté en el pasado.

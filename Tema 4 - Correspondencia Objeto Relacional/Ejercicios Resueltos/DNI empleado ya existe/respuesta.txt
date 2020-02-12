@@ -1,0 +1,18 @@
+Es necesario crear un nuevo departamento asociado a una nueva sede, porque no se puede grabar un nuevo 
+empleado si no se le asocia a una sede (columna id_depto integer not null en tabla empleado).
+Todavía no se ha visto cómo recuperar objetos existentes (se verá en breve).
+Por lo tanto, no se sabe aún cómo recuperar una sede ni un departamento.
+Tampoco se puede utilizar saveOrUpdate con sede y departamentos existentes porque no se dispone 
+de un identificador para ellos, al contrario que con los empleados, para los que se dispone del DNI.
+Las claves primarias de las tablas sede y departamento con autogeneradas.
+En todo caso se podría recuperar la sede por nombre auqnue, como se ha dicho ya, todavía no se ha visto cómo, pero
+ se verá en breve. Ahora además, si se ha creado un índice único por nombre para la sede como se plantea en una 
+actividad anterior, está garantizado que para un nombre dado no puede haber más de una sede.
+En cuanto al departamento, una vez recuperada la sede y, por lo tanto, su identificador, se podría obtener
+el departamento por nombre, dado que no puede haber más de un departamento con el mismo nombre en una sede.
+Pero de nuevo, todavía no se ha visto cómo.
+
+Los cambios realizados se pueden verificar mediante consultas de SQL:
+
+SELECT * FROM emplado
+SELECT * FROM sede

@@ -1,0 +1,1 @@
+Se recupera cada asignación con el método getSingleResult() de org.hibernate.query.Query. Se utiliza una consulta de HQL parametrizada.

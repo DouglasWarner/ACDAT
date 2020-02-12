@@ -1,0 +1,3 @@
+Basta añadir la condición siguiente a la consulta en HQL (nota: sysdate() es la fecha y hora en el servidor de base de datos):
+
+where ap.id.FInicio <= sysdate() and (ap.FFin is null or sysdate() <= ap.FFin)

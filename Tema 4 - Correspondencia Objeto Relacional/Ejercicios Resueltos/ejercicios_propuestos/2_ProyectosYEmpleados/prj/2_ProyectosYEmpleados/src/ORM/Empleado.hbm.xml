@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-abr-2019 12:24:28 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.Empleado" table="empleado" catalog="orm_gestion_proyectos" optimistic-lock="version">
+        <id name="dni" type="string">
+            <column name="dni" length="9" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomEmp" type="string">
+            <column name="nom_emp" length="32" not-null="true" />
+        </property>
+        <set name="proyectos" table="proyecto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dni_jefe_proy" length="9" not-null="true" />
+            </key>
+            <one-to-many class="ORM.Proyecto" />
+        </set>
+    </class>
+</hibernate-mapping>

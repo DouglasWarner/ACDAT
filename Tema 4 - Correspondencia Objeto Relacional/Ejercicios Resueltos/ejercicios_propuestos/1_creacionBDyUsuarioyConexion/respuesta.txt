@@ -1,0 +1,10 @@
+Se incluyen a continuación las sentencias de SQL que hay que ejecutar, como usuario root, para crear en MySQL la base de datos (orm_gestion_proyectos) y el usuario (orm_gestion_proyectos), y para asignar permisos. Es práctica habitual poner el mismo nombre, o similar, a la base de datos y al usuario al que se le da acceso.
+Son análogas a las sentencias de SQL que hay al principio del tema para la creación de una base de datos y un usuario, y para la asignación de permisos sobre la base de datos a ese usuario. Pero no se ejecutan las sentencias para creación de tablas porque, como se indica al principio, no hay que crear todas las tablas y clases desde el principio, sino a medida que vayan siendo necesarias para realizar las actividades.
+La creación de la conexión a la base de datos se hace como se explica en el tema, pero teniendo en cuenta que la base de datos es ahora orm_gestion_proyectos (no proyecto_orm), que el usuario para acceder a la base de datos tiene el mismo nombre, y que la conexión hay que crearla también con el mismo nombre que la base de datos. Por supuesto esto es una recomendación, los nombres para base de datos y usuario en MySQL y conexión en el IDE no tienen por qué coincidir.
+
+===========================
+
+create database orm_gestion_proyectos;
+
+create user 'orm_gestion_proyectos'@'localhost' identified by '(password)';
+grant select, insert, update, delete, create, drop, execute on orm_gestion_proyectos.* TO 'orm_gestion_proyectos'@'localhost';
