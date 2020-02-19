@@ -9,7 +9,9 @@ import java.io.PrintStream;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
+import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  *
@@ -21,7 +23,23 @@ public class ParsinSAX {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        String nomFich;
+        if (args.length < 1) {
+            System.out.println("Indicar por favor nombre de fichero");
+            return;
+        } else {
+            nomFich = args[0];
+        }
+        try {
+            XMLReader parserSAX = XMLReaderFactory.createXMLReader();
+            GestorEventos gestorEventos = new GestorEventos(System.out);
+            parserSAX.setContentHandler(gestorEventos);
+            parserSAX.parse(nomFich);
+        } catch (SAXException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }    
 }
 
@@ -44,23 +62,36 @@ class GestorEventos extends DefaultHandler
     
     @Override
     public void startDocument() throws SAXException {
-        super.startDocument(); //To change body of generated methods, choose Tools | Templates.
+        nivel = 0; 
     }
     
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        super.startElement(uri, localName, qName, attributes); //To change body of generated methods, choose Tools | Templates.
+        nivel++;
+        Identa();
+        ps.print("<" + qName);
+        for (int i = 0; i < attributes.getLength(); i++) {
+            ps.print(" @" + attributes.getLocalName(i) + "[" + attributes.getValue(i) + "]");
+        }
+        ps.println(">");
     }
     
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        super.endElement(uri, localName, qName); //To change body of generated methods, choose Tools | Templates.
+        nivel--;
     }    
 
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        super.characters(ch, start, length); //To change body of generated methods, choose Tools | Templates.
+        String texto = new String(ch, start, length);
+        if(texto.trim().length() == 0)
+            return;
+        nivel++;
+        Identa();
+        nivel--;
+        ps.println("#text["+texto+"]");
+        
     }
 
     @Override

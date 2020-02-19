@@ -44,25 +44,11 @@ public class ParsinDOM {
         {
             DocumentBuilder db = documento.newDocumentBuilder();
             Document docDOM = db.parse(new File(nomFichero));
-            int numClientes = 0;
-            NodeList nodos = docDOM.getChildNodes();
+                        
+            GetNCliente(docDOM);
             
-            for (int i = 0; i < nodos.getLength(); i++) {
-            if(docDOM.getNodeType() == Node.ELEMENT_NODE)
-            {
-                if(docDOM.getNodeName() == "cliente")
-                {
-                    System.out.print("Cliente: [" + numClientes++ + "] Atributos: ");
-                    NamedNodeMap atributos = docDOM.getAttributes();
-                    for (int j = 0; j < atributos.getLength(); j++) {
-                        System.out.print(atributos.item(j).getNodeName() + "[ "+ atributos.item(j).getNodeValue() + " ]");
-                    }
-                    System.out.println();
-                }
-            }
-            }
-            
-            System.out.println(docDOM.getElementsByTagName("cliente").getLength());
+            // Otra manera de obtener la cantidad de clientes que hay
+            //System.out.println(docDOM.getElementsByTagName("cliente").getLength());
         }
         catch (FileNotFoundException | ParserConfigurationException | SAXException e)
         {
@@ -74,53 +60,29 @@ public class ParsinDOM {
         }
     }
     
-    private static final String indent_nivel = " ";
-    public static void MuestraNodo(Node nodo, int nivel, PrintStream ps)
-    {
-        if (nodo.getNodeType() == Node.TEXT_NODE) {
-            if(nodo.getNodeValue().trim().length() == 0) {
-                ;
-            }            
-        }
-        
-        for (int i = 0; i < nivel; i++) {
-            ps.print(indent_nivel);
-        }
-        
-        int numClientes = 0;
-        if(nodo.getNodeType() == Node.ELEMENT_NODE)
-        {
-            if(nodo.getNodeName() == "cliente")
+   public static void GetNCliente(Node n)
+   {
+       int numClientes = 0;
+       
+       for (int i = 0; i < n.getChildNodes().getLength(); i++) 
             {
-                ps.print("Cliente: [" + numClientes++ + "] Atributos: ");
-                NamedNodeMap atributos = nodo.getAttributes();
-                for (int i = 0; i < atributos.getLength(); i++) {
-                    ps.print(atributos.item(i).getNodeName() + "[ "+ atributos.item(i).getNodeValue() + " ]");
+                Node nodo = n.getChildNodes().item(i);
+                
+                if(nodo.getNodeType() == Node.ELEMENT_NODE)
+                {
+                    if(nodo.getNodeName() == "cliente")
+                    {
+                        System.out.print("Cliente: [" + ++numClientes + "] Atributos: ");
+                        NamedNodeMap atributos = nodo.getAttributes();
+                        for (int j = 0; j < atributos.getLength(); j++) {
+                            System.out.print(atributos.item(j).getNodeName() + "[ "+ atributos.item(j).getNodeValue() + " ]");
+                        }
+                        System.out.println();
+                    }
                 }
-                ps.println();
+                
+                GetNCliente(nodo);
             }
-        }
-        switch(nodo.getNodeType())
-        {
-            case Node.DOCUMENT_NODE:
-                Document doc = (Document)nodo;
-                ps.println("Documento DOM, versión: "+doc.getXmlVersion()+", codificacion: "+ doc.getXmlEncoding());
-                break;
-            case Node.ELEMENT_NODE:
-                ps.print("<" + nodo.getNodeName());
-                NamedNodeMap atributos = nodo.getAttributes();
-                for (int i = 0; i < atributos.getLength(); i++) {
-                    ps.print(atributos.item(i).getNodeName() + "[ "+ atributos.item(i).getNodeValue() + " ]");
-                }
-                ps.println(">");
-                break;
-            case Node.TEXT_NODE:
-                ps.println(nodo.getNodeName() + " [ " + nodo.getNodeValue() + " ] ");
-                break;
-            default:
-                ps.println("Nodo de tipo: " + nodo.getNodeType());
-                break;
-        }        
-    }
+   }
     
 }
