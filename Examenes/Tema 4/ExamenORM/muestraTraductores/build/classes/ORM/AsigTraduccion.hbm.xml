@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13 Feb 2020, 12:09:37 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.AsigTraduccion" table="asig_traduccion" catalog="traduccion" optimistic-lock="version">
+        <composite-id name="id" class="ORM.AsigTraduccionId">
+            <key-property name="idTexto" type="int">
+                <column name="id_texto" />
+            </key-property>
+            <key-property name="codIdiomaDest" type="string">
+                <column name="cod_idioma_dest" length="2" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="idioma" class="ORM.Idioma" update="false" insert="false" fetch="select">
+            <column name="cod_idioma_dest" length="2" not-null="true" />
+        </many-to-one>
+        <many-to-one name="texto" class="ORM.Texto" update="false" insert="false" fetch="select">
+            <column name="id_texto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="traductor" class="ORM.Traductor" fetch="select">
+            <column name="dni_nie_trad" length="9" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

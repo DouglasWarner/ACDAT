@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13 Feb 2020, 12:09:37 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.Texto" table="texto" catalog="traduccion" optimistic-lock="version">
+        <id name="idTexto" type="java.lang.Integer">
+            <column name="id_texto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="idioma" class="ORM.Idioma" fetch="select">
+            <column name="cod_idioma" length="2" not-null="true" />
+        </many-to-one>
+        <property name="numPalabras" type="java.lang.Integer">
+            <column name="num_palabras" />
+        </property>
+        <set name="asigTraduccions" table="asig_traduccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_texto" not-null="true" />
+            </key>
+            <one-to-many class="ORM.AsigTraduccion" />
+        </set>
+    </class>
+</hibernate-mapping>

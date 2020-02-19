@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13 Feb 2020, 12:09:37 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ORM.Idioma" table="idioma" catalog="traduccion" optimistic-lock="version">
+        <id name="codIso" type="string">
+            <column name="cod_iso" length="2" />
+            <generator class="assigned" />
+        </id>
+        <property name="nomIdioma" type="string">
+            <column name="nom_idioma" length="16" not-null="true" />
+        </property>
+        <set name="textos" table="texto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cod_idioma" length="2" not-null="true" />
+            </key>
+            <one-to-many class="ORM.Texto" />
+        </set>
+        <set name="traductors" table="traductor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_lengua_nativa" length="2" not-null="true" />
+            </key>
+            <one-to-many class="ORM.Traductor" />
+        </set>
+        <set name="asigTraduccions" table="asig_traduccion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cod_idioma_dest" length="2" not-null="true" />
+            </key>
+            <one-to-many class="ORM.AsigTraduccion" />
+        </set>
+        <set name="traductors_1" table="traductor_lengua" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_lengua" length="2" not-null="true" />
+            </key>
+            <many-to-many entity-name="ORM.Traductor">
+                <column name="dni_nie" length="9" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
