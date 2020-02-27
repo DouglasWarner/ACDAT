@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tmx version="1.4">
+    <header creationdate="Wed Mar  7 00:09:25 2018"
+            srclang="en"
+            adminlang="en"
+            o-tmf="unknown"
+            segtype="sentence"
+            creationtool="Uplug"
+            creationtoolversion="unknown"
+            datatype="PlainText" />
+    <body>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>EMEA/ H/ C/ 471</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>EMEA/ H/ C/ 471</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>ABILIFY</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>ABILIFY</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>What is Abilify?</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>¿Qué es Abilify?</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Abilify is a medicine containing the active substance aripiprazole.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Abilify es un medicamento que contiene el principio activo aripiprazol.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>It is available as 5 mg, 10 mg, 15 mg and 30 mg tablets, as 10 mg, 15 mg and 30 mg orodispersible tablets (tablets that dissolve in the mouth), as an oral solution (1 mg/ ml) and as a solution for injection (7.5 mg/ ml).</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Se presenta en comprimidos de 5 mg, 10 mg, 15 mg y 30 mg, como comprimidos bucodispersables (que se disuelven en la boca), de 10 mg, 15 mg y 30 mg, en solución oral (1 mg/ ml) y en solución inyectable (7,5 mg/ ml).</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>What is Abilify used for?</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>¿Para qué se utiliza Abilify?</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Abilify is used to treat adults with the following mental illnesses: • schizophrenia, a mental illness with a number of symptoms, including disorganised thinking and speech, hallucinations (hearing or seeing things that are not there), suspiciousness and delusions (mistaken beliefs); • bipolar I disorder, a mental illness in which patients have manic episodes (periods of abnormally high mood), alternating with periods of normal mood.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Abilify está indicado para el tratamiento de pacientes adultos con las siguientes enfermedades mentales: • Esquizofrenia, una enfermedad mental que produce síntomas como desorganización del pensamiento y el habla, alucinaciones (ver o escuchar cosas que no existen), desconfianza y delirios (creencias falsas). • Trastorno bipolar I, una enfermedad mental en la que los pacientes sufren episodios maniacos (periodos de buen humor anormal) que alternan con periodos de humor normal.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>They may also have episodes of depression.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>También pueden sufrir episodios depresivos.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Abilify is used to treat moderate to severe manic episodes and to prevent manic episodes in patients who have responded to the medicine in the past.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Abilify se utiliza para tratar episodios maniacos de moderados a graves y para evitar episodios maniacos en pacientes que anteriormente habían respondido al medicamento.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The solution for injection is used for the rapid control of agitation or disturbed behaviour when taking the medicine by mouth is not appropriate.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La solución inyectable se utiliza para el control rápido de la agitación o la conducta alterada cuando la administración del medicamento por vía oral no resulta apropiada.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>How is Abilify used?</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>¿Cómo se usa Abilify?</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>For schizophrenia, the recommended starting dose is 10 or 15 mg by mouth per day.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>En el tratamiento de la esquizofrenia, la dosis inicial recomendada es de 10 o 15 mg al día por vía oral.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The maintenance dose is 15 mg once a day, but higher doses may benefit some patients.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La dosis de mantenimiento es de 15 mg una vez al día, pero algunos pacientes pueden requerir dosis mayores.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>For bipolar disorder, the recommended starting dose is 15 mg by mouth once a day, either on its own or in combination with other medicines.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>En el trastorno bipolar, la dosis inicial recomendada es de 15 mg al día por vía oral, ya sea en monoterapia o en combinación con otros medicamentos.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Some patients may benefit from a higher dose.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Algunos pacientes podrían beneficiarse de una dosis mayor.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>To prevent manic episodes, the same dose should be continued.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Para evitar los episodios maniacos, deberá seguir administrándose la misma dosis.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>For both illnesses, the oral solution or orodispersible tablets can be used in patients who have difficulty swallowing tablets.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>En ambas enfermedades pueden administrarse la solución oral o los comprimidos bucodispersables a pacientes con dificultad para tragar comprimidos.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The orodispersible tablets are taken by being placed on the tongue, where they disintegrate quickly in the saliva, or by mixing them in water before swallowing.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Los comprimidos bucodispersables se toman colocándolos sobre la lengua, donde se desintegran rápidamente en la saliva, o mezclándolos con agua antes de tragarlos.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>7 Westferry Circus, Canary Wharf, London E14 4HB, UK Tel.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La solución inyectable es adecuada únicamente para tratamientos de corta duración y debe sustituirse por la administración en forma de comprimidos, comprimidos bucodispersables o 7 Westferry Circus, Canary Wharf, London E14 4HB, UK Tel.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Reproduction is authorised provided the source is acknowledged.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Reproduction is authorised provided the source is acknowledged solución oral tan pronto como sea posible.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Abilify can be taken with or without food.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Abilify puede administrarse con o sin alimentos.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The daily dose of Abilify should not exceed 30 mg, but this dose should be used with caution in patients who have severe problems with their liver.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La dosis diaria de Abilify no deberá exceder los 30 mg, aunque deberá administrarse con precaución a los pacientes que sufran problemas hepáticos graves.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The dose of Abilify should be adjusted in patients who are taking other medicines that are broken down in the same way as Abilify.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La dosis de Abilify debe ajustarse en pacientes que estén tomando otros medicamentos que se metabolicen de la misma forma que Abilify.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Abilify has not been studied in children aged below 18 years or adults aged over 65 years.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Abilify no se ha estudiado en niños menores de 18 años o en adultos mayores de 65 años.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>How does Abilify work?</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>¿Cómo actúa Abilify?</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The active substance in Abilify, aripiprazole, is an antipsychotic medicine.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>El principio activo de Abilify, aripiprazol, es un medicamento antipsicótico.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Its exact mechanism of action is unknown, but it attaches to several different receptors on the surface of nerve cells in the brain.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Se desconoce su mecanismo de acción exacto, pero se une a varios receptores de la superficie de las neuronas del cerebro.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>This disrupts signals transmitted between brain cells by ‘ neurotransmitters’, chemicals that allow nerve cells to communicate with each other.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Esa unión altera las señales transmitidas entre las células cerebrales por los “ neurotransmisores” (sustancias químicas que permiten la comunicación entre las células nerviosas).</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Aripiprazole is thought to act mainly by being a ‘ partial agonist ’ for the receptors for the neurotransmitters dopamine and 5-hydroxytryptamine (also called serotonin).</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Se cree que el aripiprazol actúa principalmente como "agonista parcial" para los receptores de los neurotransmisores dopamina y 5-hidroxitriptamina (también denominada serotonina).</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>This means that aripiprazole acts like 5-hydroxytryptamine and dopamine to activate the receptors, but to a lesser extent than the neurotransmitters.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Esto significa que aripiprazole actúa como la 5-hidroxitriptamina y la dopamina para activar los receptores, aunque en menor medida que los neurotransmisores.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Since dopamine and 5-hydroxytryptamine are involved in schizophrenia and bipolar disorder, aripiprazole helps to normalise the activity of the brain, reducing psychotic or manic symptoms and preventing them from returning.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Puesto que la dopamina y la 5-hydroxitriptamina están implicados en la esquizofrenia y el trastorno bipolar, aripiprazol ayuda a normalizar la actividad del cerebro, reduciendo los síntomas psicóticos o maniacos y evitando su reaparición.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>How has Abilify been studied?</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>¿Qué tipo de estudios se han realizado con Abilify?</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>For the treatment of schizophrenia, there were three main short-term studies of Abilify tablets lasting four to six weeks, which involved 1,203 patients and compared Abilify with placebo (a dummy treatment).</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Para el tratamiento de la esquizofrenia se realizaron tres estudios principales de corta duración, que duraron de cuatro a seis semanas, con Abilify comprimidos, en los que participaron 1.203 pacientes y que compararon Abilify con placebo (un tratamiento simulado).</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The effectiveness of Abilify in preventing symptoms from returning was assessed in three studies lasting up to a year, two of which used haloperidol (another antipsychotic medicine) as a comparator.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La eficacia de Abilify en la prevención de la reaparición de los síntomas se evaluó asimismo en tres estudios que duraron hasta un año, dos de los cuales utilizaron haloperidol (otro antipsicótico) como medicamento de comparación.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The effectiveness of the solution for injection was compared with placebo over a period of two hours in two studies involving 805 patients with schizophrenia or related conditions who were experiencing symptoms of agitation.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La eficacia de la solución inyectable se comparó con la de placebo durante dos horas en dos estudios realizados en 805 pacientes con esquizofrenia o cuadros afines que mostraban síntomas de agitación.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>All of the studies measured the change in the patient’ s symptoms using a standard scale for schizophrenia.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Todos estos estudios evaluaron el cambio en los síntomas del paciente utilizando una escala normalizada para la esquizofrenia.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>For the treatment of bipolar disorder, there were eight main studies looking at Abilify taken by mouth.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Para el tratamiento del trastorno bipolar, se hicieron ocho estudios principales en los que se evaluó Abilify por vía oral.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>There were five short-term studies that compared the effectiveness of Abilify and placebo over three weeks in a total of 1,900 patients.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Se realizaron cinco estudios de corta duración en los que se comparó la eficacia de Abilify frente al placebo durante tres semanas en un total de 1.900 pacientes.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Two of these studies used haloperidol and lithium (another antipsychotic medicine) as comparators and continued for a further nine weeks to look at the maintenance of the effect of the medicines.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Dos de estos estudios utilizaron haloperidol y litio (otro medicamento antipsicótico) como comparadores y prosiguieron durante nueve semanas más con el fin de observar si se mantenían los efectos de los medicamentos.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Another study compared Abilify with haloperidol over 12 weeks in 347 patients, and a further study compared the effectiveness of Abilify and placebo in preventing recurrence in 160 patients whose manic symptoms had already been stabilised using Abilify.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Otro estudio comparó Abilify con haloperidol durante 12 semanas en 347 pacientes, mientras que otro estudio comparó la eficacia de Abiligy y placebo para prevenir la recurrencia de la enfermedad en 160 pacientes en los que los síntomas maniacos ya se habían estabilizado con Abilify.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The eighth study looked at the effect of adding Abilify or placebo to existing treatment with lithium or valproate (another antipsychotic medicine) in 384 patients.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>El octavo estudio evaluó el efecto de añadir Abilify o placebo al tratamiento existente con litio o valproato (otro medicamento antipsicótico) en 384 pacientes.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The effectiveness of Abilify solution for injection was compared with that of lorazepam (another antipsychotic medicine) and of placebo over a period of two hours in one study involving 301 patients with bipolar disorder who were experiencing symptoms of agitation.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La eficacia de Abilify solución inyectable se comparó con la de lorazepam (otro medicamento antipsicótico) y con la de un placebo durante dos horas en un estudio en el que participaron 301 pacientes con trastorno bipolar que experimentaban síntomas de agitación.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>All of these studies looked at the change in symptoms using a standard scale for bipolar disorder or at the number of patients who responded to treatment.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Todos estos estudios evaluaron el cambio en los síntomas mediante una escala normalizada para el trastorno bipolar o según el número de pacientes que respondieron al tratamiento.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>The company also carried out studies looking at the absorption of the orodispersible tablets and oral solution by the body.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>La empresa realizó asimismo estudios en los que se analizó la absorción de los comprimidos bucodispersables y de la solución oral por el organismo.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>What benefit has Abilify shown during the studies?</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>¿Qué beneficio ha demostrado tener Abilify durante los estudios?</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>When used to treat schizophrenia, Abilify was more effective than placebo in the short-term studies.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Usado para tratar la esquizofrenia, Abilify resultó más eficaz que el placebo en los estudios a corto plazo.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>In the long-term studies, Abilify was more effective than placebo, and as effective as haloperidol, after up to a year of treatment.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>En los estudios de larga duración, Abilify fue más eficaz que placebo e igual de eficaz que haloperidol al cabo de un período de tratamiento de hasta un año.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>In both studies of the solution for injection, patients receiving Abilify at doses of 5.25, 9.75 or 15 mg had a significantly greater reduction in symptoms of agitation than those receiving placebo.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>En los dos estudios con la solución inyectable, los pacientes tratados con Abilify en dosis de 5,25, 9,75 ó 15 mg mostraron una reducción significativamente mayor de los síntomas de agitación que los que recibieron placebo.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>When used to treat bipolar disorder, Abilify was more effective than placebo at reducing manic symptoms in four of the five short-term studies.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Cuando se usó para tratar el trastorno bipolar, Abilify fue más eficaz que el placebo para reducir los síntomas maniacos en cuatro de los cinco estudios a corto plazo.</seg>
+            </tuv>
+        </tu>
+        <tu>
+            <tuv xml:lang="en">
+                <seg>Abilify also had a similar effect to haloperidol and to lithium over three weeks.</seg>
+            </tuv>
+            <tuv xml:lang="es">
+                <seg>Abilify tuvo también un efecto 2/ 3 similar al de haloperidol y litio durante tres semanas.</seg>
+            </tuv>
+        </tu>
+    </body>
+</tmx>

@@ -8,7 +8,7 @@
 
   <cliente DNI="89012345E">
     <apellidos>ROJAS</apellidos>
-      <validez estado="borrado" timestamp="1528286082"/>
+    <validez estado="borrado" timestamp="1528286082"/>
   </cliente>
   <cliente DNI="56789012B">
     <apellidos>SAMPER</apellidos>
